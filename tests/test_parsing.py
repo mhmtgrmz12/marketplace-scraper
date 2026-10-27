@@ -84,6 +84,23 @@ class PriceFilterTests(unittest.TestCase):
         self.assertIsNone(cs.price_rejection(card("Opel Corsa\nGenk, VLG")))
 
 
+class ItemFilterTests(unittest.TestCase):
+    def test_not_a_car_titles(self):
+        # Gerçek "vehicles" akışındaki ucuz ilanların başlıkları
+        rejected = ["Jantes BBS jamais montées", "4 pneus hiver 18p", "JANTE GOLF 3 GTI / VR6", "VOLANT GOLF 3 VR6",
+                    "Remorque 240 x120 neuf", "Moteur vw polo 9n3 1.4tdi", "Mobylette puch de 1959", "Scuter 50cc",
+                    "Trotinette electrique", "2x velgen 16 inch", "4 winterbanden"]
+        kept = ["Opel Astra, nieuwe banden", "2012 VW Polo", "Motorhome Fiat Ducato", "Bandit 600",
+                "Renault laguna 3 2011", cs.NO_TITLE]
+        for title in rejected + kept:
+            with self.subTest(title=title):
+                reason = cs.item_rejection(cs.Listing("1", title, "€500", 500.0, "Genk, VLG", "", "https://x/"))
+                if title in rejected:
+                    self.assertIn("araba değil", reason)
+                else:
+                    self.assertIsNone(reason)
+
+
 class VehicleInfoTests(unittest.TestCase):
     CASES = [
         # (metin, beklenen yıl, beklenen km)

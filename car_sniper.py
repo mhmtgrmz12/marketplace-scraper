@@ -46,10 +46,10 @@ except ImportError as exc:
 # çubuğundan kopyaladığın linkler). İstediğin kadar ekleyebilirsin.
 # Linkte konum OLMALI: konumsuz linkte (/marketplace/category/vehicles) Facebook misafire
 # San Francisco ilanlarını gösterir. 110843235610039 = Lummen (Beringen'in yanı), 65 km çap.
-# Çapı değiştirmek için linkin sonuna &radius=40 gibi ekle. "cars" yerine "vehicles" römork,
-# jant, yedek parça ve motosiklet de getirir.
+# Çapı değiştirmek için linkin sonuna &radius=40 gibi ekle. "/cars/" sayfası sıralamayı yok sayıp
+# saatler önceki ilanları gösterdiği için "vehicles" kullanılıyor; araba olmayanları NOT_A_CAR_WORDS eler.
 SEARCH_URLS = [
-    "https://www.facebook.com/marketplace/110843235610039/cars/?sortBy=creation_time_descend&exact=false",
+    "https://www.facebook.com/marketplace/110843235610039/vehicles?sortBy=creation_time_descend&exact=false",
 ]
 
 # --- Filtreler ---------------------------------------------------------------
@@ -62,6 +62,16 @@ CHECK_DESCRIPTION = True          # yeni ilanın sayfasını açıp başlık + a
 SKIP_YEAR_AT_OR_BELOW = 2008      # yılı bu ve daha eski olanlar gönderilmez
 SKIP_KM_ABOVE = 200_000           # kilometresi bunun üstünde olanlar gönderilmez
 # Yıl ya da km bilgisi bulunamazsa ilan bu yüzden elenmez, gönderilir.
+
+# Başlığı bu kelimelerden biriyle başlayan ilanlar araba değil sayılır ("Jantes BBS", "4 pneus hiver",
+# "Remorque 750 kg"). Sadece başlığın başına bakılır: "Opel Astra, nieuwe banden" elenmez.
+NOT_A_CAR_WORDS = [
+    "jant", "jante", "jantes", "velg", "velgen",                      # jant
+    "pneu", "pneus", "pneux", "band", "banden", "winterbanden", "zomerbanden", "lastik",
+    "remorque", "aanhangwagen", "annhangwagen", "aanhanger",          # römork
+    "moteur", "motor", "volant", "stuur",                             # parça
+    "mobylette", "brommer", "bromfiets", "scooter", "scuter", "trottinette", "trotinette",
+]
 
 # Telegram bilgileri. Dosyaya yazabilir ya da aynı isimli ortam
 # değişkenleriyle (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID) verebilirsin.
@@ -94,6 +104,10 @@ OUTSIDE_RESULTS_MARKERS = ["outside your search", "dışındaki sonuçlar"]
 CARD_SELECTOR = "a[href*='/marketplace/item/']"
 ITEM_ID_RE = re.compile(r"/marketplace/item/(\d+)")
 NO_TITLE = "Başlık yok (ilanda belirtilmemiş)"
+# Başında "4 " / "2x " gibi adet olabilir: "4 pneus hiver", "2x velgen"
+NOT_A_CAR_RE = re.compile(
+    r"^\W*(?:\d+\s*x?\s*)?(" + "|".join(map(re.escape, NOT_A_CAR_WORDS)) + r")\b", re.IGNORECASE
+)
 LOCATION_BUTTON_SELECTOR = '[role="button"][aria-label^="Location:"]'   # "Location: Lummen, Belgium, Within 65 km"
 
 _NUM = r"\d{1,3}(?:[.,\s]\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?"
@@ -569,6 +583,12 @@ def price_rejection(listing):
     return None
 
 
+def item_rejection(listing):
+    """Başlık jant/lastik/römork/parça gibi araba olmayan bir şeyle başlıyorsa sebebini döner."""
+    match = NOT_A_CAR_RE.match(listing.title)
+    return f"araba değil: {match.group(1).lower()}" if match else None
+
+
 def vehicle_rejection(listing):
     """Yıl/km yüzünden elenmesi gerekiyorsa sebebini döner. Bilinmeyen değer elemez."""
     if listing.year is not None and listing.year <= SKIP_YEAR_AT_OR_BELOW:
@@ -788,7 +808,7 @@ def evaluate_listing(page, listing):
     if reason or not CHECK_DESCRIPTION:
         return reason
     apply_vehicle_info(listing)              # önce kartta yazanlar; elenecekse sayfayı açmaya gerek yok
-    reason = vehicle_rejection(listing)
+    reason = item_rejection(listing) or vehicle_rejection(listing)
     if reason:
         return reason
     try:
@@ -796,8 +816,8 @@ def evaluate_listing(page, listing):
     except Exception as exc:
         log(f"⚠️ İlan sayfası okunamadı, sadece karttaki bilgiyle karar verildi: {describe_error(exc)}")
         return None
-    apply_vehicle_info(listing, page_data)
-    return vehicle_rejection(listing)
+    apply_vehicle_info(listing, page_data)   # başlıksız kartta başlık burada sayfadan gelir
+    return item_rejection(listing) or vehicle_rejection(listing)
 
 
 def process_listings(store, page, url, listings, first_run):

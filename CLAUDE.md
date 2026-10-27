@@ -65,10 +65,14 @@ Bunlar kullanıcının açıkça istediği davranışlar. **Değiştirmeden önc
   ilan sayfası açılamazsa ilan gönderilir ("bilinmiyor"). Kaçan fırsat, fazladan mesajdan daha kötü.
 - Elenen ilanlar sebebiyle loglanır (`⏭️ Atlandı (2006 model)`) ve seen sayılır. Telegram'a **gönderilemeyen**
   ilan seen sayılmaz, sonraki turda tekrar denenir.
-- Arama linki: `https://www.facebook.com/marketplace/110843235610039/cars/?sortBy=creation_time_descend&exact=false`
-  (kullanıcının seçimi, 27.10.2026: Lummen = Beringen'in yanı, Facebook'un varsayılan 65 km çapı, sadece **Cars**).
-  Konumsuz linkte misafire San Francisco ilanları gelir; "vehicles" ucuz ilanlarda neredeyse sadece römork/jant/parça
-  getirir. `sortBy=creation_time_descend` şart.
+- Arama linki: `https://www.facebook.com/marketplace/110843235610039/vehicles?sortBy=creation_time_descend&exact=false`
+  (kullanıcının seçimi, 27.10.2026: Lummen = Beringen'in yanı, Facebook'un varsayılan 65 km çapı). Konumsuz linkte
+  misafire San Francisco ilanları gelir. `/cars/` sayfası `sortBy`'ı **yok sayıyor** (en üstte saatler/günler önceki
+  ilanlar, "Sort by" etiketi yok), `topLevelVehicleType=car_truck` bir şey filtrelemiyor; bu yüzden vehicles +
+  kelime filtresi. `sortBy=creation_time_descend` şart; sayfada "Sort by: Date listed: Newest first" görünmeli.
+- **Araba olmayanlar:** başlığı `NOT_A_CAR_WORDS`'teki bir kelimeyle başlayan ilan (`Jantes BBS`, `4 pneus hiver`,
+  `Remorque`, `Moteur vw polo`, `Mobylette`) `⏭️ Atlandı (araba değil: jantes)` olur. Sadece başlığın başına bakılır
+  ("Opel Astra, nieuwe banden" elenmez); başlıksız kartta sayfadaki başlıkla kontrol edilir (kullanıcının seçimi).
 
 ## Tasarım kararları ve tuzaklar
 
@@ -84,16 +88,26 @@ Bunlar kullanıcının açıkça istediği davranışlar. **Değiştirmeden önc
   başlığın yalnızca **ilk** geçişi alınır. Testte bunun için tuzak var.
 - **Yıl:** önce başlıklar (kart + `og:title`), yoksa açıklama; birden fazlaysa **en küçüğü** (sonrakiler genelde
   muayene/bakım yılı). Arkasından km/cc/€ gelen 4 haneli sayılar yıl sayılmaz.
-- **Km:** öncelik `Driven X km` alanı > karttaki km > açıklamadaki **en büyük** km. `150k`, `230dkm`, `185.000`,
-  `98 000` biçimleri tanınır; 1000'den küçük değerler mesafe sayılıp alınmaz.
+- **Km:** öncelik `Driven X km` alanı > sayfadaki gizli `vehicle_odometer_data` > karttaki km > başlık + açıklamadaki
+  **en büyük** km. Misafire "Driven" gösterilmez; gizli veri sadece ilanın tırnaklı ID'sinin geçtiği script'ten
+  okunur, mil ise km'ye çevrilir. `150k`, `230dkm`, `185.000`, `98 000`, `240.xxx` biçimleri tanınır; 1000'den
+  küçük değerler mesafe sayılıp alınmaz. `KM_BEFORE_RE`'de binlik ekinden sonra harf gelemez ("km"nin k'si).
+- **Başlık:** Belçika'da kartların çoğu başlıksız; resim alt metni "<başlık> in <konum>" olduğu için sadece
+  " in <konum>" kalan alt metin başlık sayılmaz. Kartta başlık yoksa ilan sayfasının `og:title`'ı kullanılır.
+- Açıklamadan `Condition`/`Used - Good`, satır sonu `See less`, `... · Location is approximate` ve `￼` atılır.
 - İlan sayfaları **ayrı sekmede** açılıp kapatılır: aynı sekmede başarısız bir yükleme sonraki `goto`'ları
   "interrupted by another navigation" hatasıyla zincirleme bozuyordu.
 - Tarayıcı: `--disable-blink-features=AutomationControlled`, 1280x800, `channel="chromium"` (yeni headless; olmazsa
   normal). User-Agent gerçek Chromium sürümünden ve işletim sisteminden **üretilir**, sabit UA yazma.
   `BROWSER_LOCALE = "en-US"`: kod İngilizce metinleri tanır ("Allow all cookies", "See more", "Driven",
   "About this vehicle"). Dili değiştirirsen bu metinlerin karşılıklarını da ekle. Saat dilimi `Europe/Brussels`.
-- Login pop-up: önce `aria-label="Close"` butonu, olmazsa diyalog en dıştaki sabit konumlu kapsayıcısıyla DOM'dan
-  silinir ve sayfa kaydırması geri açılır.
+- **Çerez penceresi** sayfadan ~1 sn sonra gelir ve login pop-up'ının üstünde durur: önce o beklenir
+  (`handle_cookie_banner(page, wait_ms=5_000)`) ve kaydırırken tekrar kontrol edilir. "Decline optional cookies"
+  DOM'da önce geldiği için o seçilir; gerçek DOM'daki `aria-hidden` kopya butonları `get_by_role` atlar.
+- Login pop-up: önce `aria-label="Close"` butonu (tıklama başarısız olsa da devam edilir), sonra diyalog en dıştaki
+  sabit konumlu kapsayıcısıyla DOM'dan silinir ve sayfa kaydırması geri açılır.
+- Yeni Chromium'un ilk isteği turlar arası beklemeden sonra ara sıra `net::ERR_NAME_NOT_RESOLVED` verir; arama
+  sayfası `net::ERR_` hatasında bir kez tekrar denenir. Taranan konum `📍 Taranan konum: ...` diye loglanır.
 - **Telegram:** HTML parse mode, kullanıcı metinleri `html.escape`'li. Fotoğraf açıklaması en fazla 1024 görünür
   karakter; `truncate` sınırları (başlık 150, fiyat 80, detay 150, açıklama 350) buna göre. 429'da `retry_after`
   kadar beklenir. Hata loglarında token `***` ile maskelenir.
@@ -114,10 +128,14 @@ Token ve chat ID ortam değişkeninden okunur (`TELEGRAM_BOT_TOKEN`, `TELEGRAM_C
 python3 -m unittest discover -s tests -v
 ```
 
-- `test_parsing.py` saniyeler içinde biter. `test_e2e_mock.py` ~40 sn sürer, Chromium yoksa kendini atlar.
-- Uçtan uca test gerçek Facebook'a **gitmez**: arama sayfası yerel HTTP sunucusundan, ilan sayfaları Playwright
-  `route` ile sahte HTML'den gelir. Sahte sayfalarda cookie penceresi, kapanmayan login pop-up'ı, kaydırınca
-  yüklenen ilan, filtre dışı sonuçlar, "See more" ve "Today's picks" tuzağı var.
+- `test_parsing.py` saniyeler içinde biter. `test_e2e_mock.py` ~55 sn sürer, Chromium yoksa kendini atlar.
+  pytest kurulu değil; testler `unittest` ile çalışır.
+- Uçtan uca test gerçek Facebook'a ve Telegram'a **gitmez**: arama sayfası yerel HTTP sunucusundan, ilan sayfaları
+  Playwright `route` ile sahte HTML'den gelir. Sahte sayfalar Ekim 2026'daki gerçek yapıya göre: geç gelen ve Close
+  tıklamasını engelleyen çerez penceresi (gizli kopya butonlarla), açılışta ve kaydırınca gelen kapanmayan login
+  pop-up'ı, ilk istekte DNS hatası, konum butonu, " in <konum>" alt metinleri, kaydırınca yüklenen ilan, filtre dışı
+  sonuçlar, satır içi "See more", gizli km JSON'u ve "Today's picks" tuzakları.
+- Telegram'ın gerçekten çalıştığını denemek için `python3 car_sniper.py --test` (telefona deneme mesajı gider).
 - Ayrıştırma ya da filtre mantığını değiştirince önce ilgili testi güncelle/ekle, sonra tüm testleri çalıştır.
 - Facebook'un gerçek sayfa yapısıyla ilgili bir şüphede: `HEADLESS = False` ile çalıştırıp bak; gerekirse
   `page.content()` çıktısını kaydedip incele. Gerçek DOM'a göre değişiklik yapınca sahte test sayfalarını da
@@ -125,43 +143,21 @@ python3 -m unittest discover -s tests -v
 
 ## Açık konular
 
-### Kaldığım yer (27.10.2026, dal `claude/marketplace-connection-tests-df4fae`, commit edildi, `main`'e alınmadı)
+### Durum (27.10.2026, dal `claude/marketplace-connection-tests-df4fae`, `main`'e alınmadı)
 
-Gerçek Facebook Marketplace'e (misafir, kullanıcının Mac'inden) bağlanılıp arama ve ilan sayfaları doğrulandı.
-Kod ve testler güncellendi, **tüm testler geçiyor** (28 test, ~60 sn). Gerçek sayfada görülenler ve yapılanlar:
-
-- Konumsuz link San Francisco getiriyordu → link Lummen ID'li Cars linkiyle değişti (kullanıcı onayladı).
-  Taranan konum `📍 Taranan konum: ...` diye loglanıyor (`LOCATION_BUTTON_SELECTOR`, `log_search_location`).
-  Konum ID'si, filtredeki `aria-label="Location: ..."` butonu → "Change location" diyaloğundan bulundu; şehir
-  adı (`/marketplace/beringen/`) ve `latitude/longitude` parametreleri çalışmıyor, `&radius=N` etiketi değiştiriyor.
-- Çerez penceresi sayfadan ~1 sn sonra gelip login pop-up'ının Close tıklamasını engelliyordu ve hata DOM'dan
-  silme yedeğini atlatıyordu → `handle_cookie_banner(page, wait_ms=5_000)`, kaydırma döngüsünde tekrar kontrol,
-  Close tıklaması kendi `try`'ında. "Decline optional cookies" DOM'da önce geldiği için o seçiliyor; gerçek DOM'da
-  `aria-hidden` kopya butonlar var (`get_by_role` onları atlıyor).
-- Yeni Chromium'un ilk isteği turlar arası beklemeden sonra ara sıra `net::ERR_NAME_NOT_RESOLVED` veriyor →
-  `scrape_search` `net::ERR_` hatasında bir kez tekrar deniyor.
-- Belçika'da kartların çoğu başlıksız; resmin alt metni " in Liège, WAL" → başlık sayılmıyor, başlık ilan
-  sayfasının `og:title`'ından alınıyor (`NO_TITLE`).
-- Misafire "About this vehicle / Driven" **gösterilmiyor** (araç formuyla girilen ilanda bile). Km, sayfadaki
-  JSON'da: `"vehicle_odometer_data":{"unit":"MILES","value":287000}` (ilanın tırnaklı ID'sinin geçtiği script'ten;
-  mil → km; 1000 altı yok sayılır). Öncelik: Driven > gizli km > kart km > başlık+açıklama en büyük km.
-- Km ayrıştırma: `240.xxx km` tanınıyor; `KM_BEFORE_RE` artık "km"nin k'sini binlik saymıyor
-  (`Kilometerstand: 1500 km` eskiden 1.500.000 oluyordu).
-- Açıklamadan `Condition / Used - Good`, satır sonundaki `See less`, `... · Location is approximate` ve `￼` atılıyor.
-- Gerçek ilanlarda doğrulandı: Laguna 2011/230.000 km, Zafira 2013/200.500 km, 2005 Corsa, BMW 525d 2010/240.000 km
-  doğru elendi; Sharan 2011/245.900, Mazda 287.000 mil → 461.882 km doğru okundu.
+Bot gerçek Facebook Marketplace'te (misafir, kullanıcının Mac'inden) ve gerçek Telegram'la uçtan uca doğrulandı:
+arama sayfası, ilan sayfası okuma, yıl/km/fiyat/"araba değil" filtreleri ve Telegram mesajı (`--test` ve gerçek
+ilan: "Alfa Romeo 159 €1,750" telefona gitti). Bulgular yukarıdaki iş kuralları ve tasarım kararlarına işlendi.
+Gerçek ilanlarda doğru elenenler: Laguna 2011/230.000 km, Zafira 2013/200.500 km, 2005 Corsa, BMW 525d 2010/
+240.000 km, jant/lastik/römork/motor/moped/scooter ilanları. Testler: 29 test, hepsi geçiyor.
 
 **Kalan işler:**
-1. `README.md` bölüm 3'ü güncelle: misafir modunda konum şehir adıyla değil sayısal ID ile verilir
-   (`/marketplace/<id>/cars/`), ID'yi bulma yolu ve örnek link eskimiş (`category/vehicles`).
-2. Bu dosyadaki "Tasarım kararları" ve "Test" bölümlerini yukarıdaki bulgulara göre güncelle (Km önceliği satırı,
-   login pop-up/çerez sırası, `test_e2e_mock.py` artık ~60 sn ve DNS hatası/geç çerez/gizli km tuzakları içeriyor).
-3. İstersen yeni testlerin eski kodda gerçekten düştüğünü kontrol et (`git show HEAD:car_sniper.py`).
-4. Kalan işlerden sonra `graphify update .` ve testleri çalıştırıp commit et; dalı `main`'e al
-   (`git merge claude/marketplace-connection-tests-df4fae`).
-5. İsteğe bağlı: botu gerçek Facebook'ta bir iki tur `python3 car_sniper.py` ile (Telegram ayarlıyken) çalıştırıp
-   mesajları kontrol et. Cars'ta da ara sıra jant/direksiyon/hizmet ilanı geliyor; gerekirse başlık/açıklamada
-   "jante, velg, band, pneu, volant" gibi kelimelerle eleme kullanıcıya sorulabilir.
+1. Dalı `main`'e al: ana klasörde `git merge claude/marketplace-connection-tests-df4fae`.
+2. `seen_cars.json` bu worktree'de deneme turlarından kaldı (gitignore'da). Botu ana klasörde çalıştırınca orada
+   yeni hafıza oluşur, ilk tur yine sessizdir.
+3. İzlenecek: misafir akışında ilanlar dakikalar içinde düşüyor mu (17:27'de en yeni ilan 11 dk önceydi). Telegram'a
+   uzun süre hiç ilan gelmezse önce logda `🔍 ... X yeni` sayılarına, sonra sayfada "Sort by" etiketine bak.
+   Araba olmayan ilan gelirse başlığın ilk kelimesini `NOT_A_CAR_WORDS`'e ekle (önce kullanıcıya sor).
 
 ## Git
 

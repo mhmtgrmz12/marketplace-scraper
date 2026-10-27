@@ -4,6 +4,19 @@
   "graph": {},
   "nodes": [
     {
+      "id": "tests_test_e2e_mock_mockmarketplacetest",
+      "label": "MockMarketplaceTest",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "MockMarketplaceTest",
+      "file_type": "code",
+      "norm_label": "mockmarketplacetest",
+      "source_file": "tests/test_e2e_mock.py",
+      "source_location": "L130"
+    },
+    {
       "id": "car_sniper_seenstore",
       "label": "SeenStore",
       "_callable": true,
@@ -14,7 +27,7 @@
       "file_type": "code",
       "norm_label": "seenstore",
       "source_file": "car_sniper.py",
-      "source_location": "L306"
+      "source_location": "L320"
     },
     {
       "id": "car_sniper_listing",
@@ -23,11 +36,11 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "apply_vehicle_info",
+      "community_name": "car_sniper.py",
       "file_type": "code",
       "norm_label": "listing",
       "source_file": "car_sniper.py",
-      "source_location": "L289"
+      "source_location": "L303"
     },
     {
       "id": "tests_test_parsing_vehicleinfotests",
@@ -40,7 +53,7 @@
       "file_type": "code",
       "norm_label": "vehicleinfotests",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L87"
+      "source_location": "L104"
     },
     {
       "id": "tests_test_parsing_seenstoretests",
@@ -53,7 +66,7 @@
       "file_type": "code",
       "norm_label": "seenstoretests",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L186"
+      "source_location": "L203"
     },
     {
       "id": "tests_test_parsing_parsecardtests",
@@ -82,17 +95,17 @@
       "source_location": "L68"
     },
     {
-      "id": "tests_test_e2e_mock_mockmarketplacetest",
-      "label": "MockMarketplaceTest",
+      "id": "tests_test_parsing_itemfiltertests",
+      "label": "ItemFilterTests",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 9,
       "community_name": "test_e2e_mock.py",
       "file_type": "code",
-      "norm_label": "mockmarketplacetest",
-      "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L129"
+      "norm_label": "itemfiltertests",
+      "source_file": "tests/test_parsing.py",
+      "source_location": "L87"
     },
     {
       "id": "tests_test_parsing_messagetests",
@@ -105,31 +118,127 @@
       "file_type": "code",
       "norm_label": "messagetests",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L226"
+      "source_location": "L243"
     },
     {
-      "id": "car_sniper_build_user_agent",
-      "label": "build_user_agent()",
+      "id": "tests_test_e2e_mock_mockmarketplacetest_flaky_dns",
+      "label": ".flaky_dns()",
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "car_sniper.py",
+      "community_name": "MockMarketplaceTest",
       "file_type": "code",
-      "norm_label": "build_user_agent()",
-      "source_file": "car_sniper.py",
-      "source_location": "L585"
+      "norm_label": ".flaky_dns()",
+      "source_file": "tests/test_e2e_mock.py",
+      "source_location": "L204"
     },
     {
-      "id": "car_sniper_new_stealth_context",
-      "label": "new_stealth_context()",
+      "id": "tests_test_e2e_mock_mockmarketplacetest_run_cycle",
+      "label": ".run_cycle()",
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "car_sniper.py",
+      "community_name": "MockMarketplaceTest",
       "file_type": "code",
-      "norm_label": "new_stealth_context()",
-      "source_file": "car_sniper.py",
-      "source_location": "L611"
+      "norm_label": ".run_cycle()",
+      "source_file": "tests/test_e2e_mock.py",
+      "source_location": "L211"
+    },
+    {
+      "id": "tests_test_e2e_mock_mockmarketplacetest_sent_ids",
+      "label": ".sent_ids()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "MockMarketplaceTest",
+      "file_type": "code",
+      "norm_label": ".sent_ids()",
+      "source_file": "tests/test_e2e_mock.py",
+      "source_location": "L216"
+    },
+    {
+      "id": "tests_test_e2e_mock_mockmarketplacetest_setup",
+      "label": ".setUp()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "MockMarketplaceTest",
+      "file_type": "code",
+      "norm_label": ".setup()",
+      "source_file": "tests/test_e2e_mock.py",
+      "source_location": "L169"
+    },
+    {
+      "id": "tests_test_e2e_mock_mockmarketplacetest_setup_context_with_routes",
+      "label": "context_with_routes()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "MockMarketplaceTest",
+      "file_type": "code",
+      "norm_label": "context_with_routes()",
+      "source_file": "tests/test_e2e_mock.py",
+      "source_location": "L177"
+    },
+    {
+      "id": "tests_test_e2e_mock_mockmarketplacetest_setupclass",
+      "label": ".setUpClass()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "MockMarketplaceTest",
+      "file_type": "code",
+      "norm_label": ".setupclass()",
+      "source_file": "tests/test_e2e_mock.py",
+      "source_location": "L132"
+    },
+    {
+      "id": "tests_test_e2e_mock_mockmarketplacetest_setupclass_do_get",
+      "label": "do_GET()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "MockMarketplaceTest",
+      "file_type": "code",
+      "norm_label": "do_get()",
+      "source_file": "tests/test_e2e_mock.py",
+      "source_location": "L145"
+    },
+    {
+      "id": "tests_test_e2e_mock_mockmarketplacetest_setupclass_log_message",
+      "label": "log_message()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "MockMarketplaceTest",
+      "file_type": "code",
+      "norm_label": "log_message()",
+      "source_file": "tests/test_e2e_mock.py",
+      "source_location": "L157"
+    },
+    {
+      "id": "tests_test_e2e_mock_mockmarketplacetest_teardownclass",
+      "label": ".tearDownClass()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "MockMarketplaceTest",
+      "file_type": "code",
+      "norm_label": ".teardownclass()",
+      "source_file": "tests/test_e2e_mock.py",
+      "source_location": "L165"
+    },
+    {
+      "id": "tests_test_e2e_mock_mockmarketplacetest_test_full_flow",
+      "label": ".test_full_flow()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "MockMarketplaceTest",
+      "file_type": "code",
+      "norm_label": ".test_full_flow()",
+      "source_file": "tests/test_e2e_mock.py",
+      "source_location": "L219"
     },
     {
       "id": "car_sniper_seenstore_add",
@@ -141,7 +250,7 @@
       "file_type": "code",
       "norm_label": ".add()",
       "source_file": "car_sniper.py",
-      "source_location": "L352"
+      "source_location": "L366"
     },
     {
       "id": "car_sniper_seenstore_contains",
@@ -153,7 +262,7 @@
       "file_type": "code",
       "norm_label": ".__contains__()",
       "source_file": "car_sniper.py",
-      "source_location": "L349"
+      "source_location": "L363"
     },
     {
       "id": "car_sniper_seenstore_init",
@@ -165,7 +274,7 @@
       "file_type": "code",
       "norm_label": ".__init__()",
       "source_file": "car_sniper.py",
-      "source_location": "L314"
+      "source_location": "L328"
     },
     {
       "id": "car_sniper_seenstore_is_empty",
@@ -177,7 +286,7 @@
       "file_type": "code",
       "norm_label": ".is_empty()",
       "source_file": "car_sniper.py",
-      "source_location": "L343"
+      "source_location": "L357"
     },
     {
       "id": "car_sniper_seenstore_is_seeded",
@@ -189,7 +298,7 @@
       "file_type": "code",
       "norm_label": ".is_seeded()",
       "source_file": "car_sniper.py",
-      "source_location": "L355"
+      "source_location": "L369"
     },
     {
       "id": "car_sniper_seenstore_len",
@@ -201,7 +310,7 @@
       "file_type": "code",
       "norm_label": ".__len__()",
       "source_file": "car_sniper.py",
-      "source_location": "L346"
+      "source_location": "L360"
     },
     {
       "id": "car_sniper_seenstore_load",
@@ -213,7 +322,7 @@
       "file_type": "code",
       "norm_label": "._load()",
       "source_file": "car_sniper.py",
-      "source_location": "L320"
+      "source_location": "L334"
     },
     {
       "id": "car_sniper_seenstore_mark_seeded",
@@ -225,7 +334,7 @@
       "file_type": "code",
       "norm_label": ".mark_seeded()",
       "source_file": "car_sniper.py",
-      "source_location": "L358"
+      "source_location": "L372"
     },
     {
       "id": "car_sniper_seenstore_save",
@@ -237,7 +346,7 @@
       "file_type": "code",
       "norm_label": ".save()",
       "source_file": "car_sniper.py",
-      "source_location": "L361"
+      "source_location": "L375"
     },
     {
       "id": "car_sniper_apply_vehicle_info",
@@ -245,11 +354,35 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "apply_vehicle_info",
+      "community_name": "car_sniper.py",
       "file_type": "code",
       "norm_label": "apply_vehicle_info()",
       "source_file": "car_sniper.py",
-      "source_location": "L754"
+      "source_location": "L774"
+    },
+    {
+      "id": "car_sniper_build_user_agent",
+      "label": "build_user_agent()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "car_sniper.py",
+      "file_type": "code",
+      "norm_label": "build_user_agent()",
+      "source_file": "car_sniper.py",
+      "source_location": "L605"
+    },
+    {
+      "id": "car_sniper_evaluate_listing",
+      "label": "evaluate_listing()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "car_sniper.py",
+      "file_type": "code",
+      "norm_label": "evaluate_listing()",
+      "source_file": "car_sniper.py",
+      "source_location": "L805"
     },
     {
       "id": "car_sniper_extract_km",
@@ -257,11 +390,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "apply_vehicle_info",
+      "community_name": "car_sniper.py",
       "file_type": "code",
       "norm_label": "extract_km()",
       "source_file": "car_sniper.py",
-      "source_location": "L540"
+      "source_location": "L554"
     },
     {
       "id": "car_sniper_extract_years",
@@ -269,11 +402,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "apply_vehicle_info",
+      "community_name": "car_sniper.py",
       "file_type": "code",
       "norm_label": "extract_years()",
       "source_file": "car_sniper.py",
-      "source_location": "L536"
+      "source_location": "L550"
     },
     {
       "id": "car_sniper_format_km",
@@ -281,11 +414,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "apply_vehicle_info",
+      "community_name": "car_sniper.py",
       "file_type": "code",
       "norm_label": "format_km()",
       "source_file": "car_sniper.py",
-      "source_location": "L284"
+      "source_location": "L298"
     },
     {
       "id": "car_sniper_format_message",
@@ -293,11 +426,35 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "apply_vehicle_info",
+      "community_name": "car_sniper.py",
       "file_type": "code",
       "norm_label": "format_message()",
       "source_file": "car_sniper.py",
-      "source_location": "L404"
+      "source_location": "L418"
+    },
+    {
+      "id": "car_sniper_item_rejection",
+      "label": "item_rejection()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "car_sniper.py",
+      "file_type": "code",
+      "norm_label": "item_rejection()",
+      "source_file": "car_sniper.py",
+      "source_location": "L586"
+    },
+    {
+      "id": "car_sniper_new_stealth_context",
+      "label": "new_stealth_context()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "car_sniper.py",
+      "file_type": "code",
+      "norm_label": "new_stealth_context()",
+      "source_file": "car_sniper.py",
+      "source_location": "L631"
     },
     {
       "id": "car_sniper_odometer_km",
@@ -305,11 +462,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "apply_vehicle_info",
+      "community_name": "car_sniper.py",
       "file_type": "code",
       "norm_label": "odometer_km()",
       "source_file": "car_sniper.py",
-      "source_location": "L550"
+      "source_location": "L564"
     },
     {
       "id": "car_sniper_parse_card",
@@ -317,11 +474,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "apply_vehicle_info",
+      "community_name": "car_sniper.py",
       "file_type": "code",
       "norm_label": "parse_card()",
       "source_file": "car_sniper.py",
-      "source_location": "L473"
+      "source_location": "L487"
     },
     {
       "id": "car_sniper_parse_price_value",
@@ -329,11 +486,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "apply_vehicle_info",
+      "community_name": "car_sniper.py",
       "file_type": "code",
       "norm_label": "parse_price_value()",
       "source_file": "car_sniper.py",
-      "source_location": "L459"
+      "source_location": "L473"
+    },
+    {
+      "id": "car_sniper_price_rejection",
+      "label": "price_rejection()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "car_sniper.py",
+      "file_type": "code",
+      "norm_label": "price_rejection()",
+      "source_file": "car_sniper.py",
+      "source_location": "L572"
     },
     {
       "id": "car_sniper_price_tokens",
@@ -341,11 +510,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "apply_vehicle_info",
+      "community_name": "car_sniper.py",
       "file_type": "code",
       "norm_label": "_price_tokens()",
       "source_file": "car_sniper.py",
-      "source_location": "L450"
+      "source_location": "L464"
     },
     {
       "id": "car_sniper_truncate",
@@ -353,11 +522,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "apply_vehicle_info",
+      "community_name": "car_sniper.py",
       "file_type": "code",
       "norm_label": "truncate()",
       "source_file": "car_sniper.py",
-      "source_location": "L274"
+      "source_location": "L288"
     },
     {
       "id": "car_sniper_vehicle_rejection",
@@ -365,11 +534,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "apply_vehicle_info",
+      "community_name": "car_sniper.py",
       "file_type": "code",
       "norm_label": "vehicle_rejection()",
       "source_file": "car_sniper.py",
-      "source_location": "L572"
+      "source_location": "L592"
     },
     {
       "id": "tests_test_parsing_vehicleinfotests_listing",
@@ -381,7 +550,7 @@
       "file_type": "code",
       "norm_label": ".listing()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L114"
+      "source_location": "L131"
     },
     {
       "id": "tests_test_parsing_vehicleinfotests_page",
@@ -393,7 +562,7 @@
       "file_type": "code",
       "norm_label": ".page()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L146"
+      "source_location": "L163"
     },
     {
       "id": "tests_test_parsing_vehicleinfotests_test_card_mileage_is_used",
@@ -405,7 +574,7 @@
       "file_type": "code",
       "norm_label": ".test_card_mileage_is_used()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L141"
+      "source_location": "L158"
     },
     {
       "id": "tests_test_parsing_vehicleinfotests_test_card_title_is_kept",
@@ -417,7 +586,7 @@
       "file_type": "code",
       "norm_label": ".test_card_title_is_kept()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L171"
+      "source_location": "L188"
     },
     {
       "id": "tests_test_parsing_vehicleinfotests_test_driven_field_wins_over_description",
@@ -429,7 +598,7 @@
       "file_type": "code",
       "norm_label": ".test_driven_field_wins_over_description()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L135"
+      "source_location": "L152"
     },
     {
       "id": "tests_test_parsing_vehicleinfotests_test_extract_year_and_km",
@@ -441,7 +610,7 @@
       "file_type": "code",
       "norm_label": ".test_extract_year_and_km()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L107"
+      "source_location": "L124"
     },
     {
       "id": "tests_test_parsing_vehicleinfotests_test_hidden_odometer_in_miles_is_converted",
@@ -453,7 +622,7 @@
       "file_type": "code",
       "norm_label": ".test_hidden_odometer_in_miles_is_converted()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L155"
+      "source_location": "L172"
     },
     {
       "id": "tests_test_parsing_vehicleinfotests_test_hidden_odometer_wins_over_description",
@@ -465,7 +634,7 @@
       "file_type": "code",
       "norm_label": ".test_hidden_odometer_wins_over_description()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L150"
+      "source_location": "L167"
     },
     {
       "id": "tests_test_parsing_vehicleinfotests_test_meaningless_hidden_odometer_is_ignored",
@@ -477,7 +646,7 @@
       "file_type": "code",
       "norm_label": ".test_meaningless_hidden_odometer_is_ignored()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L160"
+      "source_location": "L177"
     },
     {
       "id": "tests_test_parsing_vehicleinfotests_test_page_title_replaces_missing_card_title",
@@ -489,7 +658,7 @@
       "file_type": "code",
       "norm_label": ".test_page_title_replaces_missing_card_title()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L165"
+      "source_location": "L182"
     },
     {
       "id": "tests_test_parsing_vehicleinfotests_test_section_headings_and_page_noise_are_stripped_from_description",
@@ -501,7 +670,7 @@
       "file_type": "code",
       "norm_label": ".test_section_headings_and_page_noise_are_stripped_from_description()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L176"
+      "source_location": "L193"
     },
     {
       "id": "tests_test_parsing_vehicleinfotests_test_title_year_wins_over_description",
@@ -513,7 +682,7 @@
       "file_type": "code",
       "norm_label": ".test_title_year_wins_over_description()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L129"
+      "source_location": "L146"
     },
     {
       "id": "tests_test_parsing_vehicleinfotests_test_vehicle_rules",
@@ -525,7 +694,7 @@
       "file_type": "code",
       "norm_label": ".test_vehicle_rules()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L117"
+      "source_location": "L134"
     },
     {
       "id": "tests_test_parsing_seenstoretests_setup",
@@ -537,7 +706,7 @@
       "file_type": "code",
       "norm_label": ".setup()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L187"
+      "source_location": "L204"
     },
     {
       "id": "tests_test_parsing_seenstoretests_teardown",
@@ -549,7 +718,7 @@
       "file_type": "code",
       "norm_label": ".teardown()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L191"
+      "source_location": "L208"
     },
     {
       "id": "tests_test_parsing_seenstoretests_test_corrupt_file_is_backed_up",
@@ -561,7 +730,7 @@
       "file_type": "code",
       "norm_label": ".test_corrupt_file_is_backed_up()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L203"
+      "source_location": "L220"
     },
     {
       "id": "tests_test_parsing_seenstoretests_test_legacy_id_list_is_loaded",
@@ -573,7 +742,7 @@
       "file_type": "code",
       "norm_label": ".test_legacy_id_list_is_loaded()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L208"
+      "source_location": "L225"
     },
     {
       "id": "tests_test_parsing_seenstoretests_test_missing_and_empty_file_mean_first_run",
@@ -585,7 +754,7 @@
       "file_type": "code",
       "norm_label": ".test_missing_and_empty_file_mean_first_run()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L198"
+      "source_location": "L215"
     },
     {
       "id": "tests_test_parsing_seenstoretests_test_save_and_reload",
@@ -597,7 +766,7 @@
       "file_type": "code",
       "norm_label": ".test_save_and_reload()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L214"
+      "source_location": "L231"
     },
     {
       "id": "tests_test_parsing_seenstoretests_write",
@@ -609,79 +778,79 @@
       "file_type": "code",
       "norm_label": ".write()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L194"
+      "source_location": "L211"
+    },
+    {
+      "id": "car_sniper_describe_error",
+      "label": "describe_error()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "log",
+      "file_type": "code",
+      "norm_label": "describe_error()",
+      "source_file": "car_sniper.py",
+      "source_location": "L292"
     },
     {
       "id": "car_sniper_dismiss_login_popup",
       "label": "dismiss_login_popup()",
       "_callable": true,
       "_origin": "ast",
-      "community": 13,
-      "community_name": "evaluate_listing",
+      "community": 2,
+      "community_name": "log",
       "file_type": "code",
       "norm_label": "dismiss_login_popup()",
       "source_file": "car_sniper.py",
-      "source_location": "L637"
+      "source_location": "L657"
     },
     {
-      "id": "car_sniper_evaluate_listing",
-      "label": "evaluate_listing()",
+      "id": "car_sniper_handle_cookie_banner",
+      "label": "handle_cookie_banner()",
       "_callable": true,
       "_origin": "ast",
-      "community": 13,
-      "community_name": "evaluate_listing",
+      "community": 2,
+      "community_name": "log",
       "file_type": "code",
-      "norm_label": "evaluate_listing()",
+      "norm_label": "handle_cookie_banner()",
       "source_file": "car_sniper.py",
-      "source_location": "L785"
+      "source_location": "L643"
     },
     {
-      "id": "car_sniper_price_rejection",
-      "label": "price_rejection()",
+      "id": "car_sniper_human_pause",
+      "label": "human_pause()",
       "_callable": true,
       "_origin": "ast",
-      "community": 13,
-      "community_name": "evaluate_listing",
+      "community": 2,
+      "community_name": "log",
       "file_type": "code",
-      "norm_label": "price_rejection()",
+      "norm_label": "human_pause()",
       "source_file": "car_sniper.py",
-      "source_location": "L558"
+      "source_location": "L279"
     },
     {
-      "id": "car_sniper_read_listing_page",
-      "label": "read_listing_page()",
+      "id": "car_sniper_is_login_wall",
+      "label": "is_login_wall()",
       "_callable": true,
       "_origin": "ast",
-      "community": 13,
-      "community_name": "evaluate_listing",
+      "community": 2,
+      "community_name": "log",
       "file_type": "code",
-      "norm_label": "read_listing_page()",
+      "norm_label": "is_login_wall()",
       "source_file": "car_sniper.py",
-      "source_location": "L730"
+      "source_location": "L676"
     },
     {
-      "id": "car_sniper_log_search_location",
-      "label": "log_search_location()",
+      "id": "car_sniper_launch_browser",
+      "label": "launch_browser()",
       "_callable": true,
       "_origin": "ast",
-      "community": 14,
-      "community_name": "log_search_location",
+      "community": 2,
+      "community_name": "log",
       "file_type": "code",
-      "norm_label": "log_search_location()",
+      "norm_label": "launch_browser()",
       "source_file": "car_sniper.py",
-      "source_location": "L668"
-    },
-    {
-      "id": "car_sniper_short_url",
-      "label": "short_url()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "log_search_location",
-      "file_type": "code",
-      "norm_label": "short_url()",
-      "source_file": "car_sniper.py",
-      "source_location": "L269"
+      "source_location": "L618"
     },
     {
       "id": "car_sniper_log",
@@ -693,7 +862,19 @@
       "file_type": "code",
       "norm_label": "log()",
       "source_file": "car_sniper.py",
-      "source_location": "L261"
+      "source_location": "L275"
+    },
+    {
+      "id": "car_sniper_log_search_location",
+      "label": "log_search_location()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "log",
+      "file_type": "code",
+      "norm_label": "log_search_location()",
+      "source_file": "car_sniper.py",
+      "source_location": "L688"
     },
     {
       "id": "car_sniper_main",
@@ -705,7 +886,7 @@
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "car_sniper.py",
-      "source_location": "L885"
+      "source_location": "L905"
     },
     {
       "id": "car_sniper_notify",
@@ -717,7 +898,7 @@
       "file_type": "code",
       "norm_label": "notify()",
       "source_file": "car_sniper.py",
-      "source_location": "L423"
+      "source_location": "L437"
     },
     {
       "id": "car_sniper_process_listings",
@@ -729,7 +910,43 @@
       "file_type": "code",
       "norm_label": "process_listings()",
       "source_file": "car_sniper.py",
-      "source_location": "L803"
+      "source_location": "L823"
+    },
+    {
+      "id": "car_sniper_read_listing_page",
+      "label": "read_listing_page()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "log",
+      "file_type": "code",
+      "norm_label": "read_listing_page()",
+      "source_file": "car_sniper.py",
+      "source_location": "L750"
+    },
+    {
+      "id": "car_sniper_run_cycle",
+      "label": "run_cycle()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "log",
+      "file_type": "code",
+      "norm_label": "run_cycle()",
+      "source_file": "car_sniper.py",
+      "source_location": "L852"
+    },
+    {
+      "id": "car_sniper_scrape_search",
+      "label": "scrape_search()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "log",
+      "file_type": "code",
+      "norm_label": "scrape_search()",
+      "source_file": "car_sniper.py",
+      "source_location": "L702"
     },
     {
       "id": "car_sniper_send_test_message",
@@ -741,7 +958,19 @@
       "file_type": "code",
       "norm_label": "send_test_message()",
       "source_file": "car_sniper.py",
-      "source_location": "L865"
+      "source_location": "L885"
+    },
+    {
+      "id": "car_sniper_short_url",
+      "label": "short_url()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "log",
+      "file_type": "code",
+      "norm_label": "short_url()",
+      "source_file": "car_sniper.py",
+      "source_location": "L283"
     },
     {
       "id": "car_sniper_telegram_call",
@@ -753,7 +982,7 @@
       "file_type": "code",
       "norm_label": "telegram_call()",
       "source_file": "car_sniper.py",
-      "source_location": "L382"
+      "source_location": "L396"
     },
     {
       "id": "car_sniper_telegram_configured",
@@ -765,7 +994,7 @@
       "file_type": "code",
       "norm_label": "telegram_configured()",
       "source_file": "car_sniper.py",
-      "source_location": "L378"
+      "source_location": "L392"
     },
     {
       "id": "tests_test_parsing_card",
@@ -912,90 +1141,6 @@
       "source_location": "L83"
     },
     {
-      "id": "car_sniper_handle_cookie_banner",
-      "label": "handle_cookie_banner()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "scrape_search",
-      "file_type": "code",
-      "norm_label": "handle_cookie_banner()",
-      "source_file": "car_sniper.py",
-      "source_location": "L623"
-    },
-    {
-      "id": "car_sniper_human_pause",
-      "label": "human_pause()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "scrape_search",
-      "file_type": "code",
-      "norm_label": "human_pause()",
-      "source_file": "car_sniper.py",
-      "source_location": "L265"
-    },
-    {
-      "id": "car_sniper_is_login_wall",
-      "label": "is_login_wall()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "scrape_search",
-      "file_type": "code",
-      "norm_label": "is_login_wall()",
-      "source_file": "car_sniper.py",
-      "source_location": "L656"
-    },
-    {
-      "id": "car_sniper_scrape_search",
-      "label": "scrape_search()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "scrape_search",
-      "file_type": "code",
-      "norm_label": "scrape_search()",
-      "source_file": "car_sniper.py",
-      "source_location": "L682"
-    },
-    {
-      "id": "car_sniper_describe_error",
-      "label": "describe_error()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "run_cycle",
-      "file_type": "code",
-      "norm_label": "describe_error()",
-      "source_file": "car_sniper.py",
-      "source_location": "L278"
-    },
-    {
-      "id": "car_sniper_launch_browser",
-      "label": "launch_browser()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "run_cycle",
-      "file_type": "code",
-      "norm_label": "launch_browser()",
-      "source_file": "car_sniper.py",
-      "source_location": "L598"
-    },
-    {
-      "id": "car_sniper_run_cycle",
-      "label": "run_cycle()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "run_cycle",
-      "file_type": "code",
-      "norm_label": "run_cycle()",
-      "source_file": "car_sniper.py",
-      "source_location": "L832"
-    },
-    {
       "id": "tests_test_e2e_mock_card_html",
       "label": "card_html()",
       "_callable": true,
@@ -1005,7 +1150,7 @@
       "file_type": "code",
       "norm_label": "card_html()",
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L49"
+      "source_location": "L50"
     },
     {
       "id": "tests_test_e2e_mock_listing_html",
@@ -1017,7 +1162,7 @@
       "file_type": "code",
       "norm_label": "listing_html()",
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L101"
+      "source_location": "L102"
     },
     {
       "id": "tests_test_e2e_mock_mockmarketplacetest_fake_facebook",
@@ -1029,127 +1174,7 @@
       "file_type": "code",
       "norm_label": ".fake_facebook()",
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L197"
-    },
-    {
-      "id": "tests_test_e2e_mock_mockmarketplacetest_flaky_dns",
-      "label": ".flaky_dns()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "test_e2e_mock.py",
-      "file_type": "code",
-      "norm_label": ".flaky_dns()",
-      "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L203"
-    },
-    {
-      "id": "tests_test_e2e_mock_mockmarketplacetest_run_cycle",
-      "label": ".run_cycle()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "test_e2e_mock.py",
-      "file_type": "code",
-      "norm_label": ".run_cycle()",
-      "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L210"
-    },
-    {
-      "id": "tests_test_e2e_mock_mockmarketplacetest_sent_ids",
-      "label": ".sent_ids()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "test_e2e_mock.py",
-      "file_type": "code",
-      "norm_label": ".sent_ids()",
-      "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L215"
-    },
-    {
-      "id": "tests_test_e2e_mock_mockmarketplacetest_setup",
-      "label": ".setUp()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "test_e2e_mock.py",
-      "file_type": "code",
-      "norm_label": ".setup()",
-      "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L168"
-    },
-    {
-      "id": "tests_test_e2e_mock_mockmarketplacetest_setup_context_with_routes",
-      "label": "context_with_routes()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "test_e2e_mock.py",
-      "file_type": "code",
-      "norm_label": "context_with_routes()",
-      "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L176"
-    },
-    {
-      "id": "tests_test_e2e_mock_mockmarketplacetest_setupclass",
-      "label": ".setUpClass()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "test_e2e_mock.py",
-      "file_type": "code",
-      "norm_label": ".setupclass()",
-      "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L131"
-    },
-    {
-      "id": "tests_test_e2e_mock_mockmarketplacetest_setupclass_do_get",
-      "label": "do_GET()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "test_e2e_mock.py",
-      "file_type": "code",
-      "norm_label": "do_get()",
-      "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L144"
-    },
-    {
-      "id": "tests_test_e2e_mock_mockmarketplacetest_setupclass_log_message",
-      "label": "log_message()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "test_e2e_mock.py",
-      "file_type": "code",
-      "norm_label": "log_message()",
-      "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L156"
-    },
-    {
-      "id": "tests_test_e2e_mock_mockmarketplacetest_teardownclass",
-      "label": ".tearDownClass()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "test_e2e_mock.py",
-      "file_type": "code",
-      "norm_label": ".teardownclass()",
-      "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L164"
-    },
-    {
-      "id": "tests_test_e2e_mock_mockmarketplacetest_test_full_flow",
-      "label": ".test_full_flow()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "test_e2e_mock.py",
-      "file_type": "code",
-      "norm_label": ".test_full_flow()",
-      "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L218"
+      "source_location": "L198"
     },
     {
       "id": "tests_test_e2e_mock_search_html",
@@ -1161,7 +1186,19 @@
       "file_type": "code",
       "norm_label": "search_html()",
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L59"
+      "source_location": "L60"
+    },
+    {
+      "id": "tests_test_parsing_itemfiltertests_test_not_a_car_titles",
+      "label": ".test_not_a_car_titles()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "test_e2e_mock.py",
+      "file_type": "code",
+      "norm_label": ".test_not_a_car_titles()",
+      "source_file": "tests/test_parsing.py",
+      "source_location": "L88"
     },
     {
       "id": "tests_test_parsing_messagetests_test_html_is_escaped_and_within_caption_limit",
@@ -1173,13 +1210,35 @@
       "file_type": "code",
       "norm_label": ".test_html_is_escaped_and_within_caption_limit()",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L227"
+      "source_location": "L244"
+    },
+    {
+      "id": "tests_test_e2e_mock_rationale_205",
+      "label": "Ger\u00e7ekte g\u00f6r\u00fclen hata: yeni taray\u0131c\u0131n\u0131n ilk iste\u011fi net::ERR_NAME_NOT_RESOLVED\u2026",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "MockMarketplaceTest",
+      "file_type": "rationale",
+      "norm_label": "gercekte gorulen hata: yeni taray\u0131c\u0131n\u0131n ilk istegi net::err_name_not_resolved...",
+      "source_file": "tests/test_e2e_mock.py",
+      "source_location": "L205"
+    },
+    {
+      "id": "car_sniper_rationale_321",
+      "label": "G\u00f6r\u00fclen ilan ID'lerini ve sessizce haf\u0131zaya al\u0131nm\u0131\u015f arama linklerini tutar. Bir\u2026",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "SeenStore",
+      "file_type": "rationale",
+      "norm_label": "gorulen ilan id'lerini ve sessizce haf\u0131zaya al\u0131nm\u0131s arama linklerini tutar. bir...",
+      "source_file": "car_sniper.py",
+      "source_location": "L321"
     },
     {
       "id": "car_sniper",
       "label": "car_sniper.py",
       "_origin": "ast",
-      "community": 0,
+      "community": 10,
       "community_name": "car_sniper.py",
       "file_type": "code",
       "norm_label": "car_sniper.py",
@@ -1190,7 +1249,7 @@
       "id": "car_sniper_rationale_3",
       "label": "car_sniper.py - Facebook Marketplace araba \"sniper\" botu (Swoopa benzeri).\u2026",
       "_origin": "ast",
-      "community": 0,
+      "community": 10,
       "community_name": "car_sniper.py",
       "file_type": "rationale",
       "norm_label": "car_sniper.py - facebook marketplace araba \"sniper\" botu (swoopa benzeri)....",
@@ -1198,151 +1257,129 @@
       "source_location": "L3"
     },
     {
-      "id": "car_sniper_rationale_586",
+      "id": "car_sniper_rationale_465",
+      "label": "Sat\u0131r sadece fiyattan olu\u015fuyorsa fiyatlar\u0131 d\u00f6ner (indirimde eski fiyat da\u2026",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "car_sniper.py",
+      "file_type": "rationale",
+      "norm_label": "sat\u0131r sadece fiyattan olusuyorsa fiyatlar\u0131 doner (indirimde eski fiyat da...",
+      "source_file": "car_sniper.py",
+      "source_location": "L465"
+    },
+    {
+      "id": "car_sniper_rationale_474",
+      "label": "\u20ac1,500' / '1.500 \u20ac' / '\u00dccretsiz' \u2192 1500.0 / 1500.0 / 0.0",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "car_sniper.py",
+      "file_type": "rationale",
+      "norm_label": "\u20ac1,500' / '1.500 \u20ac' / 'ucretsiz' \u2192 1500.0 / 1500.0 / 0.0",
+      "source_file": "car_sniper.py",
+      "source_location": "L474"
+    },
+    {
+      "id": "car_sniper_rationale_565",
+      "label": "Sayfadaki gizli km verisini km olarak d\u00f6ner (mil ise \u00e7evrilir); yoksa ya da\u2026",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "car_sniper.py",
+      "file_type": "rationale",
+      "norm_label": "sayfadaki gizli km verisini km olarak doner (mil ise cevrilir); yoksa ya da...",
+      "source_file": "car_sniper.py",
+      "source_location": "L565"
+    },
+    {
+      "id": "car_sniper_rationale_573",
+      "label": "Fiyat y\u00fcz\u00fcnden elenmesi gerekiyorsa sebebini, gerekmiyorsa None d\u00f6ner.",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "car_sniper.py",
+      "file_type": "rationale",
+      "norm_label": "fiyat yuzunden elenmesi gerekiyorsa sebebini, gerekmiyorsa none doner.",
+      "source_file": "car_sniper.py",
+      "source_location": "L573"
+    },
+    {
+      "id": "car_sniper_rationale_587",
+      "label": "Ba\u015fl\u0131k jant/lastik/r\u00f6mork/par\u00e7a gibi araba olmayan bir \u015feyle ba\u015fl\u0131yorsa\u2026",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "car_sniper.py",
+      "file_type": "rationale",
+      "norm_label": "basl\u0131k jant/lastik/romork/parca gibi araba olmayan bir seyle basl\u0131yorsa...",
+      "source_file": "car_sniper.py",
+      "source_location": "L587"
+    },
+    {
+      "id": "car_sniper_rationale_593",
+      "label": "Y\u0131l/km y\u00fcz\u00fcnden elenmesi gerekiyorsa sebebini d\u00f6ner. Bilinmeyen de\u011fer elemez.",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "car_sniper.py",
+      "file_type": "rationale",
+      "norm_label": "y\u0131l/km yuzunden elenmesi gerekiyorsa sebebini doner. bilinmeyen deger elemez.",
+      "source_file": "car_sniper.py",
+      "source_location": "L593"
+    },
+    {
+      "id": "car_sniper_rationale_606",
       "label": "Ger\u00e7ek Chromium s\u00fcr\u00fcm\u00fcyle ve i\u015fletim sistemiyle tutarl\u0131 bir User-Agent \u00fcretir.",
       "_origin": "ast",
-      "community": 0,
+      "community": 10,
       "community_name": "car_sniper.py",
       "file_type": "rationale",
       "norm_label": "gercek chromium surumuyle ve isletim sistemiyle tutarl\u0131 bir user-agent uretir.",
       "source_file": "car_sniper.py",
-      "source_location": "L586"
+      "source_location": "L606"
     },
     {
-      "id": "car_sniper_rationale_307",
-      "label": "G\u00f6r\u00fclen ilan ID'lerini ve sessizce haf\u0131zaya al\u0131nm\u0131\u015f arama linklerini tutar. Bir\u2026",
+      "id": "car_sniper_rationale_775",
+      "label": "Karttan ve (varsa) ilan sayfas\u0131ndan y\u0131l\u0131, km'yi ve a\u00e7\u0131klamay\u0131 listing'e i\u015fler.",
       "_origin": "ast",
-      "community": 1,
-      "community_name": "SeenStore",
+      "community": 10,
+      "community_name": "car_sniper.py",
       "file_type": "rationale",
-      "norm_label": "gorulen ilan id'lerini ve sessizce haf\u0131zaya al\u0131nm\u0131s arama linklerini tutar. bir...",
+      "norm_label": "karttan ve (varsa) ilan sayfas\u0131ndan y\u0131l\u0131, km'yi ve ac\u0131klamay\u0131 listing'e isler.",
       "source_file": "car_sniper.py",
-      "source_location": "L307"
+      "source_location": "L775"
+    },
+    {
+      "id": "car_sniper_rationale_806",
+      "label": "Fiyat ve y\u0131l/km filtrelerini uygular; ilan elenecekse sebebini d\u00f6ner.",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "car_sniper.py",
+      "file_type": "rationale",
+      "norm_label": "fiyat ve y\u0131l/km filtrelerini uygular; ilan elenecekse sebebini doner.",
+      "source_file": "car_sniper.py",
+      "source_location": "L806"
     },
     {
       "id": "claude_tasar\u0131m_kararlar\u0131_ve_tuzaklar",
       "label": "Tasar\u0131m kararlar\u0131 ve tuzaklar",
       "_origin": "ast",
-      "community": 10,
-      "community_name": "apply_vehicle_info",
+      "community": 2,
+      "community_name": "log",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "tasar\u0131m kararlar\u0131 ve tuzaklar",
       "source_file": "CLAUDE.md",
-      "source_location": "L73"
+      "source_location": "L77"
     },
     {
-      "id": "car_sniper_rationale_451",
-      "label": "Sat\u0131r sadece fiyattan olu\u015fuyorsa fiyatlar\u0131 d\u00f6ner (indirimde eski fiyat da\u2026",
+      "id": "car_sniper_rationale_293",
+      "label": "Playwright hatalar\u0131n\u0131n uzun 'Call log' k\u0131sm\u0131n\u0131 at\u0131p tek sat\u0131rl\u0131k \u00f6zet d\u00f6ner.",
       "_origin": "ast",
-      "community": 10,
-      "community_name": "apply_vehicle_info",
+      "community": 2,
+      "community_name": "log",
       "file_type": "rationale",
-      "norm_label": "sat\u0131r sadece fiyattan olusuyorsa fiyatlar\u0131 doner (indirimde eski fiyat da...",
+      "norm_label": "playwright hatalar\u0131n\u0131n uzun 'call log' k\u0131sm\u0131n\u0131 at\u0131p tek sat\u0131rl\u0131k ozet doner.",
       "source_file": "car_sniper.py",
-      "source_location": "L451"
+      "source_location": "L293"
     },
     {
-      "id": "car_sniper_rationale_460",
-      "label": "\u20ac1,500' / '1.500 \u20ac' / '\u00dccretsiz' \u2192 1500.0 / 1500.0 / 0.0",
-      "_origin": "ast",
-      "community": 10,
-      "community_name": "apply_vehicle_info",
-      "file_type": "rationale",
-      "norm_label": "\u20ac1,500' / '1.500 \u20ac' / 'ucretsiz' \u2192 1500.0 / 1500.0 / 0.0",
-      "source_file": "car_sniper.py",
-      "source_location": "L460"
-    },
-    {
-      "id": "car_sniper_rationale_551",
-      "label": "Sayfadaki gizli km verisini km olarak d\u00f6ner (mil ise \u00e7evrilir); yoksa ya da\u2026",
-      "_origin": "ast",
-      "community": 10,
-      "community_name": "apply_vehicle_info",
-      "file_type": "rationale",
-      "norm_label": "sayfadaki gizli km verisini km olarak doner (mil ise cevrilir); yoksa ya da...",
-      "source_file": "car_sniper.py",
-      "source_location": "L551"
-    },
-    {
-      "id": "car_sniper_rationale_573",
-      "label": "Y\u0131l/km y\u00fcz\u00fcnden elenmesi gerekiyorsa sebebini d\u00f6ner. Bilinmeyen de\u011fer elemez.",
-      "_origin": "ast",
-      "community": 10,
-      "community_name": "apply_vehicle_info",
-      "file_type": "rationale",
-      "norm_label": "y\u0131l/km yuzunden elenmesi gerekiyorsa sebebini doner. bilinmeyen deger elemez.",
-      "source_file": "car_sniper.py",
-      "source_location": "L573"
-    },
-    {
-      "id": "car_sniper_rationale_755",
-      "label": "Karttan ve (varsa) ilan sayfas\u0131ndan y\u0131l\u0131, km'yi ve a\u00e7\u0131klamay\u0131 listing'e i\u015fler.",
-      "_origin": "ast",
-      "community": 10,
-      "community_name": "apply_vehicle_info",
-      "file_type": "rationale",
-      "norm_label": "karttan ve (varsa) ilan sayfas\u0131ndan y\u0131l\u0131, km'yi ve ac\u0131klamay\u0131 listing'e isler.",
-      "source_file": "car_sniper.py",
-      "source_location": "L755"
-    },
-    {
-      "id": "car_sniper_rationale_559",
-      "label": "Fiyat y\u00fcz\u00fcnden elenmesi gerekiyorsa sebebini, gerekmiyorsa None d\u00f6ner.",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "evaluate_listing",
-      "file_type": "rationale",
-      "norm_label": "fiyat yuzunden elenmesi gerekiyorsa sebebini, gerekmiyorsa none doner.",
-      "source_file": "car_sniper.py",
-      "source_location": "L559"
-    },
-    {
-      "id": "car_sniper_rationale_638",
-      "label": "Facebook'un 'Giri\u015f Yap' pop-up'\u0131n\u0131 kapat\u0131r; kapanmazsa DOM'dan siler.",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "evaluate_listing",
-      "file_type": "rationale",
-      "norm_label": "facebook'un 'giris yap' pop-up'\u0131n\u0131 kapat\u0131r; kapanmazsa dom'dan siler.",
-      "source_file": "car_sniper.py",
-      "source_location": "L638"
-    },
-    {
-      "id": "car_sniper_rationale_731",
-      "label": "\u0130lan sayfas\u0131n\u0131 ayr\u0131 bir sekmede a\u00e7\u0131p ba\u015fl\u0131k/a\u00e7\u0131klama/km bilgisini d\u00f6ner. Ayr\u0131\u2026",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "evaluate_listing",
-      "file_type": "rationale",
-      "norm_label": "ilan sayfas\u0131n\u0131 ayr\u0131 bir sekmede ac\u0131p basl\u0131k/ac\u0131klama/km bilgisini doner. ayr\u0131...",
-      "source_file": "car_sniper.py",
-      "source_location": "L731"
-    },
-    {
-      "id": "car_sniper_rationale_786",
-      "label": "Fiyat ve y\u0131l/km filtrelerini uygular; ilan elenecekse sebebini d\u00f6ner.",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "evaluate_listing",
-      "file_type": "rationale",
-      "norm_label": "fiyat ve y\u0131l/km filtrelerini uygular; ilan elenecekse sebebini doner.",
-      "source_file": "car_sniper.py",
-      "source_location": "L786"
-    },
-    {
-      "id": "car_sniper_rationale_669",
-      "label": "Facebook'un hangi konumu tarad\u0131\u011f\u0131n\u0131 ilk seferde ve de\u011fi\u015fti\u011finde loglar.",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "log_search_location",
-      "file_type": "rationale",
-      "norm_label": "facebook'un hangi konumu tarad\u0131g\u0131n\u0131 ilk seferde ve degistiginde loglar.",
-      "source_file": "car_sniper.py",
-      "source_location": "L669"
-    },
-    {
-      "id": "car_sniper_rationale_424",
+      "id": "car_sniper_rationale_438",
       "label": "Bildirimi g\u00f6nderir; ba\u015far\u0131l\u0131ysa True d\u00f6ner.",
       "_origin": "ast",
       "community": 2,
@@ -1350,10 +1387,65 @@
       "file_type": "rationale",
       "norm_label": "bildirimi gonderir; basar\u0131l\u0131ysa true doner.",
       "source_file": "car_sniper.py",
-      "source_location": "L424"
+      "source_location": "L438"
     },
     {
-      "id": "car_sniper_rationale_804",
+      "id": "car_sniper_rationale_644",
+      "label": "\u00c7erez penceresini kapat\u0131r. Pencere sayfa y\u00fcklendikten biraz sonra gelir;\u2026",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "log",
+      "file_type": "rationale",
+      "norm_label": "cerez penceresini kapat\u0131r. pencere sayfa yuklendikten biraz sonra gelir;...",
+      "source_file": "car_sniper.py",
+      "source_location": "L644"
+    },
+    {
+      "id": "car_sniper_rationale_658",
+      "label": "Facebook'un 'Giri\u015f Yap' pop-up'\u0131n\u0131 kapat\u0131r; kapanmazsa DOM'dan siler.",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "log",
+      "file_type": "rationale",
+      "norm_label": "facebook'un 'giris yap' pop-up'\u0131n\u0131 kapat\u0131r; kapanmazsa dom'dan siler.",
+      "source_file": "car_sniper.py",
+      "source_location": "L658"
+    },
+    {
+      "id": "car_sniper_rationale_689",
+      "label": "Facebook'un hangi konumu tarad\u0131\u011f\u0131n\u0131 ilk seferde ve de\u011fi\u015fti\u011finde loglar.",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "log",
+      "file_type": "rationale",
+      "norm_label": "facebook'un hangi konumu tarad\u0131g\u0131n\u0131 ilk seferde ve degistiginde loglar.",
+      "source_file": "car_sniper.py",
+      "source_location": "L689"
+    },
+    {
+      "id": "car_sniper_rationale_703",
+      "label": "Bir arama sayfas\u0131n\u0131 a\u00e7ar ve \u00fczerindeki ilanlar\u0131 d\u00f6ner.",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "log",
+      "file_type": "rationale",
+      "norm_label": "bir arama sayfas\u0131n\u0131 acar ve uzerindeki ilanlar\u0131 doner.",
+      "source_file": "car_sniper.py",
+      "source_location": "L703"
+    },
+    {
+      "id": "car_sniper_rationale_751",
+      "label": "\u0130lan sayfas\u0131n\u0131 ayr\u0131 bir sekmede a\u00e7\u0131p ba\u015fl\u0131k/a\u00e7\u0131klama/km bilgisini d\u00f6ner. Ayr\u0131\u2026",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "log",
+      "file_type": "rationale",
+      "norm_label": "ilan sayfas\u0131n\u0131 ayr\u0131 bir sekmede ac\u0131p basl\u0131k/ac\u0131klama/km bilgisini doner. ayr\u0131...",
+      "source_file": "car_sniper.py",
+      "source_location": "L751"
+    },
+    {
+      "id": "car_sniper_rationale_824",
       "label": "Yeni ilanlar\u0131 bildirir; daha \u00f6nce hi\u00e7 taranmam\u0131\u015f linkleri sessizce haf\u0131zaya\u2026",
       "_origin": "ast",
       "community": 2,
@@ -1361,29 +1453,7 @@
       "file_type": "rationale",
       "norm_label": "yeni ilanlar\u0131 bildirir; daha once hic taranmam\u0131s linkleri sessizce haf\u0131zaya...",
       "source_file": "car_sniper.py",
-      "source_location": "L804"
-    },
-    {
-      "id": "car_sniper_rationale_624",
-      "label": "\u00c7erez penceresini kapat\u0131r. Pencere sayfa y\u00fcklendikten biraz sonra gelir;\u2026",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "scrape_search",
-      "file_type": "rationale",
-      "norm_label": "cerez penceresini kapat\u0131r. pencere sayfa yuklendikten biraz sonra gelir;...",
-      "source_file": "car_sniper.py",
-      "source_location": "L624"
-    },
-    {
-      "id": "car_sniper_rationale_683",
-      "label": "Bir arama sayfas\u0131n\u0131 a\u00e7ar ve \u00fczerindeki ilanlar\u0131 d\u00f6ner.",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "scrape_search",
-      "file_type": "rationale",
-      "norm_label": "bir arama sayfas\u0131n\u0131 acar ve uzerindeki ilanlar\u0131 doner.",
-      "source_file": "car_sniper.py",
-      "source_location": "L683"
+      "source_location": "L824"
     },
     {
       "id": "readme",
@@ -1443,7 +1513,7 @@
       "node_kind": "heading",
       "norm_label": "4. filtreler",
       "source_file": "README.md",
-      "source_location": "L47"
+      "source_location": "L54"
     },
     {
       "id": "readme_5_\u00e7al\u0131\u015ft\u0131rma",
@@ -1455,7 +1525,7 @@
       "node_kind": "heading",
       "norm_label": "5. cal\u0131st\u0131rma",
       "source_file": "README.md",
-      "source_location": "L64"
+      "source_location": "L72"
     },
     {
       "id": "readme_6_test",
@@ -1467,7 +1537,7 @@
       "node_kind": "heading",
       "norm_label": "6. test",
       "source_file": "README.md",
-      "source_location": "L78"
+      "source_location": "L86"
     },
     {
       "id": "readme_marketplace_scraper",
@@ -1480,17 +1550,6 @@
       "norm_label": "marketplace-scraper",
       "source_file": "README.md",
       "source_location": "L1"
-    },
-    {
-      "id": "car_sniper_rationale_279",
-      "label": "Playwright hatalar\u0131n\u0131n uzun 'Call log' k\u0131sm\u0131n\u0131 at\u0131p tek sat\u0131rl\u0131k \u00f6zet d\u00f6ner.",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "run_cycle",
-      "file_type": "rationale",
-      "norm_label": "playwright hatalar\u0131n\u0131n uzun 'call log' k\u0131sm\u0131n\u0131 at\u0131p tek sat\u0131rl\u0131k ozet doner.",
-      "source_file": "car_sniper.py",
-      "source_location": "L279"
     },
     {
       "id": "claude",
@@ -1526,7 +1585,7 @@
       "node_kind": "heading",
       "norm_label": "ac\u0131k konular",
       "source_file": "CLAUDE.md",
-      "source_location": "L126"
+      "source_location": "L144"
     },
     {
       "id": "claude_dosyalar",
@@ -1541,6 +1600,18 @@
       "source_location": "L26"
     },
     {
+      "id": "claude_durum_27_10_2026_dal_claude_marketplace_connection_tests_df4fae_main_e_al\u0131nmad\u0131",
+      "label": "Durum (27.10.2026, dal `claude/marketplace-connection-tests-df4fae`, `main`'e al\u0131nmad\u0131)",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "marketplace-scraper: Car Sniper",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "durum (27.10.2026, dal `claude/marketplace-connection-tests-df4fae`, `main`'e al\u0131nmad\u0131)",
+      "source_file": "CLAUDE.md",
+      "source_location": "L146"
+    },
+    {
       "id": "claude_git",
       "label": "Git",
       "_origin": "ast",
@@ -1550,7 +1621,7 @@
       "node_kind": "heading",
       "norm_label": "git",
       "source_file": "CLAUDE.md",
-      "source_location": "L165"
+      "source_location": "L162"
     },
     {
       "id": "claude_gizli_bilgiler",
@@ -1562,7 +1633,7 @@
       "node_kind": "heading",
       "norm_label": "gizli bilgiler",
       "source_file": "CLAUDE.md",
-      "source_location": "L105"
+      "source_location": "L119"
     },
     {
       "id": "claude_graphify",
@@ -1574,19 +1645,7 @@
       "node_kind": "heading",
       "norm_label": "graphify",
       "source_file": "CLAUDE.md",
-      "source_location": "L170"
-    },
-    {
-      "id": "claude_kald\u0131\u011f\u0131m_yer_27_10_2026_worktree_claude_marketplace_connection_tests_df4fae_commit_edilmedi",
-      "label": "Kald\u0131\u011f\u0131m yer (27.10.2026, worktree `claude/marketplace-connection-tests-df4fae`, commit edilmedi)",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "marketplace-scraper: Car Sniper",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "kald\u0131g\u0131m yer (27.10.2026, worktree `claude/marketplace-connection-tests-df4fae`, commit edilmedi)",
-      "source_file": "CLAUDE.md",
-      "source_location": "L128"
+      "source_location": "L167"
     },
     {
       "id": "claude_kullan\u0131c\u0131n\u0131n_i\u015f_kurallar\u0131",
@@ -1622,7 +1681,7 @@
       "node_kind": "heading",
       "norm_label": "test",
       "source_file": "CLAUDE.md",
-      "source_location": "L111"
+      "source_location": "L125"
     },
     {
       "id": "claude_\u00e7al\u0131\u015ft\u0131rma",
@@ -1694,17 +1753,6 @@
       "source_location": "L1"
     },
     {
-      "id": "tests_test_e2e_mock_rationale_204",
-      "label": "Ger\u00e7ekte g\u00f6r\u00fclen hata: yeni taray\u0131c\u0131n\u0131n ilk iste\u011fi net::ERR_NAME_NOT_RESOLVED\u2026",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "test_e2e_mock.py",
-      "file_type": "rationale",
-      "norm_label": "gercekte gorulen hata: yeni taray\u0131c\u0131n\u0131n ilk istegi net::err_name_not_resolved...",
-      "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L204"
-    },
-    {
       "id": "tests_test_parsing_rationale_1",
       "label": "Taray\u0131c\u0131 ve a\u011f gerektirmeyen testler: kart ayr\u0131\u015ft\u0131rma, fiyat ve y\u0131l/km\u2026",
       "_origin": "ast",
@@ -1719,7 +1767,7 @@
       "id": "dataclasses",
       "label": "dataclasses",
       "_origin": "semantic",
-      "community": 0,
+      "community": 10,
       "community_name": "car_sniper.py",
       "external": true,
       "file_type": "concept",
@@ -1731,7 +1779,7 @@
       "id": "datetime",
       "label": "datetime",
       "_origin": "semantic",
-      "community": 0,
+      "community": 10,
       "community_name": "car_sniper.py",
       "external": true,
       "file_type": "concept",
@@ -1740,10 +1788,22 @@
       "type": "external"
     },
     {
+      "id": "html",
+      "label": "html",
+      "_origin": "semantic",
+      "community": 10,
+      "community_name": "car_sniper.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "html",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "playwright_sync_api",
       "label": "playwright_sync_api",
       "_origin": "semantic",
-      "community": 0,
+      "community": 10,
       "community_name": "car_sniper.py",
       "external": true,
       "file_type": "concept",
@@ -1752,10 +1812,22 @@
       "type": "external"
     },
     {
+      "id": "re",
+      "label": "re",
+      "_origin": "semantic",
+      "community": 10,
+      "community_name": "car_sniper.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "re",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "requests",
       "label": "requests",
       "_origin": "semantic",
-      "community": 0,
+      "community": 10,
       "community_name": "car_sniper.py",
       "external": true,
       "file_type": "concept",
@@ -1767,7 +1839,7 @@
       "id": "typing",
       "label": "typing",
       "_origin": "semantic",
-      "community": 0,
+      "community": 10,
       "community_name": "car_sniper.py",
       "external": true,
       "file_type": "concept",
@@ -1776,14 +1848,14 @@
       "type": "external"
     },
     {
-      "id": "re",
-      "label": "re",
+      "id": "random",
+      "label": "random",
       "_origin": "semantic",
-      "community": 10,
-      "community_name": "apply_vehicle_info",
+      "community": 2,
+      "community_name": "log",
       "external": true,
       "file_type": "concept",
-      "norm_label": "re",
+      "norm_label": "random",
       "source_file": "",
       "type": "external"
     },
@@ -1808,30 +1880,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "time",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "random",
-      "label": "random",
-      "_origin": "semantic",
-      "community": 4,
-      "community_name": "scrape_search",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "random",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "html",
-      "label": "html",
-      "_origin": "semantic",
-      "community": 9,
-      "community_name": "test_e2e_mock.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "html",
       "source_file": "",
       "type": "external"
     },
@@ -1918,7 +1966,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L765",
+      "source_location": "L785",
       "weight": 1.0
     },
     {
@@ -1930,7 +1978,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L769",
+      "source_location": "L789",
       "weight": 1.0
     },
     {
@@ -1942,7 +1990,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L772",
+      "source_location": "L792",
       "weight": 1.0
     },
     {
@@ -1954,7 +2002,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L773",
+      "source_location": "L793",
       "weight": 1.0
     },
     {
@@ -1966,7 +2014,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L651",
+      "source_location": "L671",
       "weight": 1.0
     },
     {
@@ -1978,7 +2026,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L653",
+      "source_location": "L673",
       "weight": 1.0
     },
     {
@@ -1990,7 +2038,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L787",
+      "source_location": "L807",
       "weight": 1.0
     },
     {
@@ -2002,7 +2050,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L790",
+      "source_location": "L810",
+      "weight": 1.0
+    },
+    {
+      "source": "car_sniper_evaluate_listing",
+      "target": "car_sniper_item_rejection",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "car_sniper.py",
+      "source_location": "L811",
       "weight": 1.0
     },
     {
@@ -2014,7 +2074,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L791",
+      "source_location": "L811",
       "weight": 1.0
     },
     {
@@ -2026,7 +2086,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L795",
+      "source_location": "L815",
       "weight": 1.0
     },
     {
@@ -2038,7 +2098,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L797",
+      "source_location": "L817",
       "weight": 1.0
     },
     {
@@ -2050,7 +2110,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L797",
+      "source_location": "L817",
       "weight": 1.0
     },
     {
@@ -2062,7 +2122,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L544",
+      "source_location": "L558",
       "weight": 1.0
     },
     {
@@ -2074,7 +2134,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L405",
+      "source_location": "L419",
       "weight": 1.0
     },
     {
@@ -2086,7 +2146,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L415",
+      "source_location": "L429",
       "weight": 1.0
     },
     {
@@ -2098,7 +2158,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L418",
+      "source_location": "L432",
       "weight": 1.0
     },
     {
@@ -2110,7 +2170,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L631",
+      "source_location": "L651",
       "weight": 1.0
     },
     {
@@ -2122,7 +2182,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L632",
+      "source_location": "L652",
       "weight": 1.0
     },
     {
@@ -2134,7 +2194,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L266",
+      "source_location": "L280",
       "weight": 1.0
     },
     {
@@ -2146,7 +2206,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L266",
+      "source_location": "L280",
       "weight": 1.0
     },
     {
@@ -2158,7 +2218,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L679",
+      "source_location": "L699",
       "weight": 1.0
     },
     {
@@ -2170,7 +2230,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L679",
+      "source_location": "L699",
       "weight": 1.0
     },
     {
@@ -2182,7 +2242,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L893",
+      "source_location": "L913",
       "weight": 1.0
     },
     {
@@ -2194,7 +2254,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L895",
+      "source_location": "L915",
       "weight": 1.0
     },
     {
@@ -2206,7 +2266,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L897",
+      "source_location": "L917",
       "weight": 1.0
     },
     {
@@ -2218,7 +2278,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L898",
+      "source_location": "L918",
       "weight": 1.0
     },
     {
@@ -2230,7 +2290,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L901",
+      "source_location": "L921",
       "weight": 1.0
     },
     {
@@ -2242,7 +2302,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L908",
+      "source_location": "L928",
       "weight": 1.0
     },
     {
@@ -2254,7 +2314,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L910",
+      "source_location": "L930",
       "weight": 1.0
     },
     {
@@ -2266,7 +2326,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L911",
+      "source_location": "L931",
       "weight": 1.0
     },
     {
@@ -2278,7 +2338,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L914",
+      "source_location": "L934",
       "weight": 1.0
     },
     {
@@ -2290,7 +2350,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L613",
+      "source_location": "L633",
       "weight": 1.0
     },
     {
@@ -2302,7 +2362,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L425",
+      "source_location": "L439",
       "weight": 1.0
     },
     {
@@ -2314,7 +2374,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L426",
+      "source_location": "L440",
       "weight": 1.0
     },
     {
@@ -2326,7 +2386,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L427",
+      "source_location": "L441",
       "weight": 1.0
     },
     {
@@ -2338,7 +2398,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L429",
+      "source_location": "L443",
       "weight": 1.0
     },
     {
@@ -2350,7 +2410,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L489",
+      "source_location": "L503",
       "weight": 1.0
     },
     {
@@ -2362,7 +2422,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L510",
+      "source_location": "L524",
       "weight": 1.0
     },
     {
@@ -2374,7 +2434,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L521",
+      "source_location": "L535",
       "weight": 1.0
     },
     {
@@ -2386,7 +2446,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L523",
+      "source_location": "L537",
       "weight": 1.0
     },
     {
@@ -2398,7 +2458,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L463",
+      "source_location": "L477",
       "weight": 1.0
     },
     {
@@ -2410,7 +2470,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L811",
+      "source_location": "L831",
       "weight": 1.0
     },
     {
@@ -2422,7 +2482,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L811",
+      "source_location": "L831",
       "weight": 1.0
     },
     {
@@ -2434,7 +2494,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L817",
+      "source_location": "L837",
       "weight": 1.0
     },
     {
@@ -2446,7 +2506,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L824",
+      "source_location": "L844",
       "weight": 1.0
     },
     {
@@ -2458,7 +2518,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L829",
+      "source_location": "L849",
       "weight": 1.0
     },
     {
@@ -2470,7 +2530,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L738",
+      "source_location": "L758",
       "weight": 1.0
     },
     {
@@ -2482,7 +2542,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L739",
+      "source_location": "L759",
       "weight": 1.0
     },
     {
@@ -2494,7 +2554,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L835",
+      "source_location": "L855",
       "weight": 1.0
     },
     {
@@ -2506,7 +2566,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L838",
+      "source_location": "L858",
       "weight": 1.0
     },
     {
@@ -2518,7 +2578,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L840",
+      "source_location": "L860",
       "weight": 1.0
     },
     {
@@ -2530,7 +2590,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L843",
+      "source_location": "L863",
       "weight": 1.0
     },
     {
@@ -2542,7 +2602,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L845",
+      "source_location": "L865",
       "weight": 1.0
     },
     {
@@ -2554,7 +2614,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L847",
+      "source_location": "L867",
       "weight": 1.0
     },
     {
@@ -2566,7 +2626,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L847",
+      "source_location": "L867",
       "weight": 1.0
     },
     {
@@ -2578,7 +2638,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L850",
+      "source_location": "L870",
       "weight": 1.0
     },
     {
@@ -2590,7 +2650,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L691",
+      "source_location": "L711",
       "weight": 1.0
     },
     {
@@ -2602,7 +2662,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L691",
+      "source_location": "L711",
       "weight": 1.0
     },
     {
@@ -2614,7 +2674,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L692",
+      "source_location": "L712",
       "weight": 1.0
     },
     {
@@ -2626,7 +2686,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L695",
+      "source_location": "L715",
       "weight": 1.0
     },
     {
@@ -2638,7 +2698,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L696",
+      "source_location": "L716",
       "weight": 1.0
     },
     {
@@ -2650,7 +2710,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L701",
+      "source_location": "L721",
       "weight": 1.0
     },
     {
@@ -2662,7 +2722,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L706",
+      "source_location": "L726",
       "weight": 1.0
     },
     {
@@ -2674,7 +2734,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L709",
+      "source_location": "L729",
       "weight": 1.0
     },
     {
@@ -2686,7 +2746,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L720",
+      "source_location": "L740",
       "weight": 1.0
     },
     {
@@ -2698,7 +2758,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L318",
+      "source_location": "L332",
       "weight": 1.0
     },
     {
@@ -2710,7 +2770,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L329",
+      "source_location": "L343",
       "weight": 1.0
     },
     {
@@ -2722,7 +2782,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L371",
+      "source_location": "L385",
       "weight": 1.0
     },
     {
@@ -2734,7 +2794,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L866",
+      "source_location": "L886",
       "weight": 1.0
     },
     {
@@ -2746,7 +2806,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L867",
+      "source_location": "L887",
       "weight": 1.0
     },
     {
@@ -2758,7 +2818,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L868",
+      "source_location": "L888",
       "weight": 1.0
     },
     {
@@ -2770,7 +2830,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L880",
+      "source_location": "L900",
       "weight": 1.0
     },
     {
@@ -2782,7 +2842,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L881",
+      "source_location": "L901",
       "weight": 1.0
     },
     {
@@ -2794,7 +2854,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L388",
+      "source_location": "L402",
       "weight": 1.0
     },
     {
@@ -2806,7 +2866,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L390",
+      "source_location": "L404",
       "weight": 1.0
     },
     {
@@ -2818,7 +2878,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "car_sniper.py",
-      "source_location": "L577",
+      "source_location": "L597",
       "weight": 1.0
     },
     {
@@ -2830,7 +2890,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L51",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -2842,7 +2902,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L107",
+      "source_location": "L108",
       "weight": 1.0
     },
     {
@@ -2854,7 +2914,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L122",
+      "source_location": "L123",
       "weight": 1.0
     },
     {
@@ -2866,7 +2926,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L201",
+      "source_location": "L202",
       "weight": 1.0
     },
     {
@@ -2878,7 +2938,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L150",
+      "source_location": "L151",
       "weight": 1.0
     },
     {
@@ -2890,7 +2950,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L223",
+      "source_location": "L224",
       "weight": 1.0
     },
     {
@@ -2902,7 +2962,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L233",
+      "source_location": "L234",
       "weight": 1.0
     },
     {
@@ -2914,7 +2974,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L60",
+      "source_location": "L61",
       "weight": 1.0
     },
     {
@@ -2926,7 +2986,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L87",
+      "source_location": "L88",
       "weight": 1.0
     },
     {
@@ -3070,7 +3130,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L204",
+      "source_location": "L221",
       "weight": 1.0
     },
     {
@@ -3082,7 +3142,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L209",
+      "source_location": "L226",
       "weight": 1.0
     },
     {
@@ -3094,7 +3154,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L200",
+      "source_location": "L217",
       "weight": 1.0
     },
     {
@@ -3106,7 +3166,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L142",
+      "source_location": "L159",
       "weight": 1.0
     },
     {
@@ -3118,7 +3178,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L172",
+      "source_location": "L189",
       "weight": 1.0
     },
     {
@@ -3130,7 +3190,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L173",
+      "source_location": "L190",
       "weight": 1.0
     },
     {
@@ -3142,7 +3202,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L136",
+      "source_location": "L153",
       "weight": 1.0
     },
     {
@@ -3154,7 +3214,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L156",
+      "source_location": "L173",
       "weight": 1.0
     },
     {
@@ -3166,7 +3226,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L157",
+      "source_location": "L174",
       "weight": 1.0
     },
     {
@@ -3178,7 +3238,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L151",
+      "source_location": "L168",
       "weight": 1.0
     },
     {
@@ -3190,7 +3250,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L152",
+      "source_location": "L169",
       "weight": 1.0
     },
     {
@@ -3202,7 +3262,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L161",
+      "source_location": "L178",
       "weight": 1.0
     },
     {
@@ -3214,7 +3274,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L162",
+      "source_location": "L179",
       "weight": 1.0
     },
     {
@@ -3226,7 +3286,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L166",
+      "source_location": "L183",
       "weight": 1.0
     },
     {
@@ -3238,7 +3298,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L167",
+      "source_location": "L184",
       "weight": 1.0
     },
     {
@@ -3250,7 +3310,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L180",
+      "source_location": "L197",
       "weight": 1.0
     },
     {
@@ -3262,7 +3322,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L181",
+      "source_location": "L198",
       "weight": 1.0
     },
     {
@@ -3274,7 +3334,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L130",
+      "source_location": "L147",
       "weight": 1.0
     },
     {
@@ -3286,7 +3346,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_parsing.py",
-      "source_location": "L122",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -3645,7 +3705,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L261",
+      "source_location": "L275",
       "weight": 1.0
     },
     {
@@ -3656,7 +3716,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L265",
+      "source_location": "L279",
       "weight": 1.0
     },
     {
@@ -3667,7 +3727,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L269",
+      "source_location": "L283",
       "weight": 1.0
     },
     {
@@ -3678,7 +3738,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L274",
+      "source_location": "L288",
       "weight": 1.0
     },
     {
@@ -3689,7 +3749,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L278",
+      "source_location": "L292",
       "weight": 1.0
     },
     {
@@ -3700,7 +3760,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L284",
+      "source_location": "L298",
       "weight": 1.0
     },
     {
@@ -3711,7 +3771,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L289",
+      "source_location": "L303",
       "weight": 1.0
     },
     {
@@ -3722,7 +3782,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L306",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -3733,7 +3793,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L378",
+      "source_location": "L392",
       "weight": 1.0
     },
     {
@@ -3744,7 +3804,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L382",
+      "source_location": "L396",
       "weight": 1.0
     },
     {
@@ -3755,7 +3815,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L404",
+      "source_location": "L418",
       "weight": 1.0
     },
     {
@@ -3766,7 +3826,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L423",
+      "source_location": "L437",
       "weight": 1.0
     },
     {
@@ -3777,7 +3837,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L450",
+      "source_location": "L464",
       "weight": 1.0
     },
     {
@@ -3788,7 +3848,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L459",
+      "source_location": "L473",
       "weight": 1.0
     },
     {
@@ -3799,7 +3859,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L473",
+      "source_location": "L487",
       "weight": 1.0
     },
     {
@@ -3810,7 +3870,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L536",
+      "source_location": "L550",
       "weight": 1.0
     },
     {
@@ -3821,7 +3881,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L540",
+      "source_location": "L554",
       "weight": 1.0
     },
     {
@@ -3832,7 +3892,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L550",
+      "source_location": "L564",
       "weight": 1.0
     },
     {
@@ -3843,7 +3903,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L558",
+      "source_location": "L572",
+      "weight": 1.0
+    },
+    {
+      "source": "car_sniper",
+      "target": "car_sniper_item_rejection",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "car_sniper.py",
+      "source_location": "L586",
       "weight": 1.0
     },
     {
@@ -3854,7 +3925,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L572",
+      "source_location": "L592",
       "weight": 1.0
     },
     {
@@ -3865,7 +3936,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L585",
+      "source_location": "L605",
       "weight": 1.0
     },
     {
@@ -3876,7 +3947,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L598",
+      "source_location": "L618",
       "weight": 1.0
     },
     {
@@ -3887,7 +3958,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L611",
+      "source_location": "L631",
       "weight": 1.0
     },
     {
@@ -3898,7 +3969,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L623",
+      "source_location": "L643",
       "weight": 1.0
     },
     {
@@ -3909,7 +3980,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L637",
+      "source_location": "L657",
       "weight": 1.0
     },
     {
@@ -3920,7 +3991,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L656",
+      "source_location": "L676",
       "weight": 1.0
     },
     {
@@ -3931,7 +4002,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L668",
+      "source_location": "L688",
       "weight": 1.0
     },
     {
@@ -3942,7 +4013,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L682",
+      "source_location": "L702",
       "weight": 1.0
     },
     {
@@ -3953,7 +4024,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L730",
+      "source_location": "L750",
       "weight": 1.0
     },
     {
@@ -3964,7 +4035,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L754",
+      "source_location": "L774",
       "weight": 1.0
     },
     {
@@ -3975,7 +4046,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L785",
+      "source_location": "L805",
       "weight": 1.0
     },
     {
@@ -3986,7 +4057,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L803",
+      "source_location": "L823",
       "weight": 1.0
     },
     {
@@ -3997,7 +4068,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L832",
+      "source_location": "L852",
       "weight": 1.0
     },
     {
@@ -4008,7 +4079,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L865",
+      "source_location": "L885",
       "weight": 1.0
     },
     {
@@ -4019,7 +4090,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L885",
+      "source_location": "L905",
       "weight": 1.0
     },
     {
@@ -4035,13 +4106,13 @@
     },
     {
       "source": "claude_a\u00e7\u0131k_konular",
-      "target": "claude_kald\u0131\u011f\u0131m_yer_27_10_2026_worktree_claude_marketplace_connection_tests_df4fae_commit_edilmedi",
+      "target": "claude_durum_27_10_2026_dal_claude_marketplace_connection_tests_df4fae_main_e_al\u0131nmad\u0131",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L128",
+      "source_location": "L146",
       "weight": 1.0
     },
     {
@@ -4057,17 +4128,6 @@
     },
     {
       "source": "claude_marketplace_scraper_car_sniper",
-      "target": "claude_gizli_bilgiler",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "CLAUDE.md",
-      "source_location": "L105",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_marketplace_scraper_car_sniper",
       "target": "claude_\u00e7al\u0131\u015ft\u0131rma",
       "relation": "contains",
       "_origin": "ast",
@@ -4079,13 +4139,24 @@
     },
     {
       "source": "claude_marketplace_scraper_car_sniper",
+      "target": "claude_gizli_bilgiler",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "L119",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_marketplace_scraper_car_sniper",
       "target": "claude_test",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L111",
+      "source_location": "L125",
       "weight": 1.0
     },
     {
@@ -4096,7 +4167,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L126",
+      "source_location": "L144",
       "weight": 1.0
     },
     {
@@ -4107,7 +4178,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L165",
+      "source_location": "L162",
       "weight": 1.0
     },
     {
@@ -4118,7 +4189,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L170",
+      "source_location": "L167",
       "weight": 1.0
     },
     {
@@ -4162,7 +4233,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L73",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -4206,18 +4277,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L47",
-      "weight": 1.0
-    },
-    {
-      "source": "readme_marketplace_scraper",
-      "target": "readme_5_\u00e7al\u0131\u015ft\u0131rma",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L64",
+      "source_location": "L54",
       "weight": 1.0
     },
     {
@@ -4233,13 +4293,24 @@
     },
     {
       "source": "readme_marketplace_scraper",
+      "target": "readme_5_\u00e7al\u0131\u015ft\u0131rma",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_marketplace_scraper",
       "target": "readme_6_test",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L78",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -4250,7 +4321,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L101",
+      "source_location": "L102",
       "weight": 1.0
     },
     {
@@ -4261,7 +4332,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L129",
+      "source_location": "L130",
       "weight": 1.0
     },
     {
@@ -4272,7 +4343,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L49",
+      "source_location": "L50",
       "weight": 1.0
     },
     {
@@ -4283,7 +4354,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L59",
+      "source_location": "L60",
       "weight": 1.0
     },
     {
@@ -4294,7 +4365,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L144",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -4305,7 +4376,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L156",
+      "source_location": "L157",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_parsing",
+      "target": "tests_test_parsing_vehicleinfotests",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_parsing.py",
+      "source_location": "L104",
       "weight": 1.0
     },
     {
@@ -4338,7 +4420,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L186",
+      "source_location": "L203",
       "weight": 1.0
     },
     {
@@ -4349,7 +4431,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L226",
+      "source_location": "L243",
       "weight": 1.0
     },
     {
@@ -4365,7 +4447,7 @@
     },
     {
       "source": "tests_test_parsing",
-      "target": "tests_test_parsing_vehicleinfotests",
+      "target": "tests_test_parsing_itemfiltertests",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4382,7 +4464,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L314",
+      "source_location": "L328",
       "weight": 1.0
     },
     {
@@ -4393,7 +4475,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L320",
+      "source_location": "L334",
       "weight": 1.0
     },
     {
@@ -4404,7 +4486,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L343",
+      "source_location": "L357",
       "weight": 1.0
     },
     {
@@ -4415,7 +4497,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L346",
+      "source_location": "L360",
       "weight": 1.0
     },
     {
@@ -4426,7 +4508,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L349",
+      "source_location": "L363",
       "weight": 1.0
     },
     {
@@ -4437,7 +4519,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L352",
+      "source_location": "L366",
       "weight": 1.0
     },
     {
@@ -4448,7 +4530,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L355",
+      "source_location": "L369",
       "weight": 1.0
     },
     {
@@ -4459,7 +4541,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L358",
+      "source_location": "L372",
       "weight": 1.0
     },
     {
@@ -4470,7 +4552,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L361",
+      "source_location": "L375",
       "weight": 1.0
     },
     {
@@ -4481,7 +4563,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L131",
+      "source_location": "L132",
       "weight": 1.0
     },
     {
@@ -4492,7 +4574,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L164",
+      "source_location": "L165",
       "weight": 1.0
     },
     {
@@ -4503,7 +4585,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L168",
+      "source_location": "L169",
       "weight": 1.0
     },
     {
@@ -4514,7 +4596,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L197",
+      "source_location": "L198",
       "weight": 1.0
     },
     {
@@ -4525,7 +4607,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L203",
+      "source_location": "L204",
       "weight": 1.0
     },
     {
@@ -4536,7 +4618,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L210",
+      "source_location": "L211",
       "weight": 1.0
     },
     {
@@ -4547,7 +4629,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L215",
+      "source_location": "L216",
       "weight": 1.0
     },
     {
@@ -4558,7 +4640,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L218",
+      "source_location": "L219",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_parsing_itemfiltertests",
+      "target": "tests_test_parsing_itemfiltertests_test_not_a_car_titles",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_parsing.py",
+      "source_location": "L88",
       "weight": 1.0
     },
     {
@@ -4569,7 +4662,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L227",
+      "source_location": "L244",
       "weight": 1.0
     },
     {
@@ -4701,7 +4794,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L187",
+      "source_location": "L204",
       "weight": 1.0
     },
     {
@@ -4712,7 +4805,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L191",
+      "source_location": "L208",
       "weight": 1.0
     },
     {
@@ -4723,7 +4816,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L194",
+      "source_location": "L211",
       "weight": 1.0
     },
     {
@@ -4734,7 +4827,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L198",
+      "source_location": "L215",
       "weight": 1.0
     },
     {
@@ -4745,7 +4838,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L203",
+      "source_location": "L220",
       "weight": 1.0
     },
     {
@@ -4756,7 +4849,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L208",
+      "source_location": "L225",
       "weight": 1.0
     },
     {
@@ -4767,7 +4860,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L214",
+      "source_location": "L231",
       "weight": 1.0
     },
     {
@@ -4778,7 +4871,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L107",
+      "source_location": "L124",
       "weight": 1.0
     },
     {
@@ -4789,7 +4882,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L114",
+      "source_location": "L131",
       "weight": 1.0
     },
     {
@@ -4800,7 +4893,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L117",
+      "source_location": "L134",
       "weight": 1.0
     },
     {
@@ -4811,7 +4904,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L129",
+      "source_location": "L146",
       "weight": 1.0
     },
     {
@@ -4822,7 +4915,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L135",
+      "source_location": "L152",
       "weight": 1.0
     },
     {
@@ -4833,7 +4926,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L141",
+      "source_location": "L158",
       "weight": 1.0
     },
     {
@@ -4844,7 +4937,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L146",
+      "source_location": "L163",
       "weight": 1.0
     },
     {
@@ -4855,7 +4948,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L150",
+      "source_location": "L167",
       "weight": 1.0
     },
     {
@@ -4866,7 +4959,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L155",
+      "source_location": "L172",
       "weight": 1.0
     },
     {
@@ -4877,7 +4970,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L160",
+      "source_location": "L177",
       "weight": 1.0
     },
     {
@@ -4888,7 +4981,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L165",
+      "source_location": "L182",
       "weight": 1.0
     },
     {
@@ -4899,7 +4992,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L171",
+      "source_location": "L188",
       "weight": 1.0
     },
     {
@@ -4910,18 +5003,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_parsing.py",
-      "source_location": "L176",
+      "source_location": "L193",
       "weight": 1.0
     },
     {
-      "source": "car_sniper_rationale_279",
+      "source": "car_sniper_rationale_293",
       "target": "car_sniper_describe_error",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L279",
+      "source_location": "L293",
       "weight": 1.0
     },
     {
@@ -4936,74 +5029,63 @@
       "weight": 1.0
     },
     {
-      "source": "car_sniper_rationale_307",
+      "source": "car_sniper_rationale_321",
       "target": "car_sniper_seenstore",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L307",
+      "source_location": "L321",
       "weight": 1.0
     },
     {
-      "source": "car_sniper_rationale_424",
+      "source": "car_sniper_rationale_438",
       "target": "car_sniper_notify",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L424",
+      "source_location": "L438",
       "weight": 1.0
     },
     {
-      "source": "car_sniper_rationale_451",
+      "source": "car_sniper_rationale_465",
       "target": "car_sniper_price_tokens",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L451",
+      "source_location": "L465",
       "weight": 1.0
     },
     {
-      "source": "car_sniper_rationale_460",
+      "source": "car_sniper_rationale_474",
       "target": "car_sniper_parse_price_value",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L460",
+      "source_location": "L474",
       "weight": 1.0
     },
     {
-      "source": "car_sniper_rationale_551",
+      "source": "car_sniper_rationale_565",
       "target": "car_sniper_odometer_km",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L551",
-      "weight": 1.0
-    },
-    {
-      "source": "car_sniper_rationale_559",
-      "target": "car_sniper_price_rejection",
-      "relation": "rationale_for",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "car_sniper.py",
-      "source_location": "L559",
+      "source_location": "L565",
       "weight": 1.0
     },
     {
       "source": "car_sniper_rationale_573",
-      "target": "car_sniper_vehicle_rejection",
+      "target": "car_sniper_price_rejection",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5013,102 +5095,124 @@
       "weight": 1.0
     },
     {
-      "source": "car_sniper_rationale_586",
+      "source": "car_sniper_rationale_587",
+      "target": "car_sniper_item_rejection",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "car_sniper.py",
+      "source_location": "L587",
+      "weight": 1.0
+    },
+    {
+      "source": "car_sniper_rationale_593",
+      "target": "car_sniper_vehicle_rejection",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "car_sniper.py",
+      "source_location": "L593",
+      "weight": 1.0
+    },
+    {
+      "source": "car_sniper_rationale_606",
       "target": "car_sniper_build_user_agent",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L586",
+      "source_location": "L606",
       "weight": 1.0
     },
     {
-      "source": "car_sniper_rationale_624",
+      "source": "car_sniper_rationale_644",
       "target": "car_sniper_handle_cookie_banner",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L624",
+      "source_location": "L644",
       "weight": 1.0
     },
     {
-      "source": "car_sniper_rationale_638",
+      "source": "car_sniper_rationale_658",
       "target": "car_sniper_dismiss_login_popup",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L638",
+      "source_location": "L658",
       "weight": 1.0
     },
     {
-      "source": "car_sniper_rationale_669",
+      "source": "car_sniper_rationale_689",
       "target": "car_sniper_log_search_location",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L669",
+      "source_location": "L689",
       "weight": 1.0
     },
     {
-      "source": "car_sniper_rationale_683",
+      "source": "car_sniper_rationale_703",
       "target": "car_sniper_scrape_search",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L683",
+      "source_location": "L703",
       "weight": 1.0
     },
     {
-      "source": "car_sniper_rationale_731",
+      "source": "car_sniper_rationale_751",
       "target": "car_sniper_read_listing_page",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L731",
+      "source_location": "L751",
       "weight": 1.0
     },
     {
-      "source": "car_sniper_rationale_755",
+      "source": "car_sniper_rationale_775",
       "target": "car_sniper_apply_vehicle_info",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L755",
+      "source_location": "L775",
       "weight": 1.0
     },
     {
-      "source": "car_sniper_rationale_786",
+      "source": "car_sniper_rationale_806",
       "target": "car_sniper_evaluate_listing",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L786",
+      "source_location": "L806",
       "weight": 1.0
     },
     {
-      "source": "car_sniper_rationale_804",
+      "source": "car_sniper_rationale_824",
       "target": "car_sniper_process_listings",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "car_sniper.py",
-      "source_location": "L804",
+      "source_location": "L824",
       "weight": 1.0
     },
     {
@@ -5123,14 +5227,14 @@
       "weight": 1.0
     },
     {
-      "source": "tests_test_e2e_mock_rationale_204",
+      "source": "tests_test_e2e_mock_rationale_205",
       "target": "tests_test_e2e_mock_mockmarketplacetest_flaky_dns",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L204",
+      "source_location": "L205",
       "weight": 1.0
     },
     {
@@ -5153,7 +5257,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "tests/test_e2e_mock.py",
-      "source_location": "L183",
+      "source_location": "L184",
       "weight": 1.0
     },
     {
@@ -5165,7 +5269,7 @@
       "confidence_score": 0.95,
       "context": "describe_error()",
       "source_file": "CLAUDE.md",
-      "source_location": "L100",
+      "source_location": "L114",
       "weight": 1.0
     },
     {
@@ -5177,19 +5281,19 @@
       "confidence_score": 0.95,
       "context": "log()",
       "source_file": "CLAUDE.md",
-      "source_location": "L103",
+      "source_location": "L117",
       "weight": 1.0
     },
     {
-      "source": "claude_kald\u0131\u011f\u0131m_yer_27_10_2026_worktree_claude_marketplace_connection_tests_df4fae_commit_edilmedi",
-      "target": "car_sniper_log_search_location",
+      "source": "claude_durum_27_10_2026_dal_claude_marketplace_connection_tests_df4fae_main_e_al\u0131nmad\u0131",
+      "target": "car_sniper_main",
       "relation": "references",
       "_origin": "ast",
       "confidence": "INFERRED",
       "confidence_score": 0.95,
-      "context": "log_search_location",
+      "context": "main",
       "source_file": "CLAUDE.md",
-      "source_location": "L134",
+      "source_location": "L146",
       "weight": 1.0
     },
     {
@@ -5201,31 +5305,7 @@
       "confidence_score": 0.95,
       "context": "main",
       "source_file": "CLAUDE.md",
-      "source_location": "L167",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_kald\u0131\u011f\u0131m_yer_27_10_2026_worktree_claude_marketplace_connection_tests_df4fae_commit_edilmedi",
-      "target": "car_sniper_main",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "context": "main",
-      "source_file": "CLAUDE.md",
-      "source_location": "L160",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_kald\u0131\u011f\u0131m_yer_27_10_2026_worktree_claude_marketplace_connection_tests_df4fae_commit_edilmedi",
-      "target": "car_sniper_scrape_search",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "context": "scrape_search",
-      "source_file": "CLAUDE.md",
-      "source_location": "L142",
+      "source_location": "L164",
       "weight": 1.0
     },
     {
@@ -5237,10 +5317,10 @@
       "confidence_score": 0.95,
       "context": "truncate",
       "source_file": "CLAUDE.md",
-      "source_location": "L98",
+      "source_location": "L112",
       "weight": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "3592446220ed96948a17af36c60d659f993a19f5"
+  "built_at_commit": "59a4d3f51f0102ef1e84c9e6b041b68bbcddd758"
 }

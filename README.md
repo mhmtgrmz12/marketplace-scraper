@@ -27,21 +27,28 @@ python -m playwright install chromium
 
 ## 3. Doğru Marketplace arama linkini almak
 
-1. `facebook.com/marketplace` → sol menüden **Araçlar (Vehicles)** kategorisine gir.
-2. **Konum**: Şehrini seç. Misafir modunda konumu linkteki şehir kısmı belirler
-   (`/marketplace/istanbul/vehicles`).
-3. **Filtreler**: Minimum/maksimum fiyat, yıl, marka, kilometre gibi filtreleri ayarla.
-4. **Sırala (Sort by)** → **Tarih: Önce en yeni (Date listed: Newest first)** seç.
-   Linkte `sortBy=creation_time_descend` görünmeli. Bu ayar **çok önemli**: en yeni ilanlar
-   en üstte olmazsa bot yeni ilanları geç görür.
-5. Adres çubuğundaki linkin tamamını kopyalayıp `SEARCH_URLS` listesine ekle.
-6. Linki **gizli pencerede (giriş yapmadan)** açıp ilanların göründüğünü kontrol et.
-   Bot da sayfayı bu şekilde görür.
+Bot Facebook'a giriş yapmadığı için linkte **konum olmak zorunda**. Konumsuz linkte
+(`/marketplace/category/vehicles`) Facebook misafire San Francisco ilanlarını gösterir.
 
-Örnek link:
+1. **Gizli pencerede (giriş yapmadan)** `facebook.com/marketplace` → **Vehicles**'a gir.
+   "Cars" alt kategorisini kullanma: misafire sıralamayı yok sayıp saatler önceki ilanları gösteriyor.
+   Vehicles'taki jant, lastik, römork, parça ve moped ilanlarını bot başlıklarından eler (`NOT_A_CAR_WORDS`).
+2. **Konum**: Soldaki filtrelerde konuma ("Location: ...") tıkla, şehrini yazıp seç, **Apply**.
+   Konum linke yazılmaz, oturumda kalır. Linkte gerekli olan **sayısal konum ID'sini** bulmak için
+   konumu seçtikten sonra sayfadaki kategori linklerine bak: `/marketplace/<ID>/vehicles/` biçimindedir.
+   Şehir adıyla (`/marketplace/beringen/`) ya da `latitude`/`longitude` ile çalışmaz.
+   Beringen için Facebook'un en yakın konumu Lummen: `110843235610039`.
+3. **Çap**: Varsayılan 65 km. Değiştirmek için linkin sonuna `&radius=40` gibi ekle.
+4. **Sırala**: Linkte `sortBy=creation_time_descend` (Date listed: Newest first) olmalı.
+   Bu ayar **çok önemli**: en yeni ilanlar en üstte olmazsa bot yeni ilanları geç görür.
+   Linki gizli pencerede açınca solda "Sort by: Date listed: Newest first" yazmalı.
+5. Linki `SEARCH_URLS` listesine ekle. Bot her taramada taradığı konumu loglar
+   (`📍 Taranan konum: Lummen, Belgium, Within 65 km`); yanlış şehir görürsen linki kontrol et.
+
+Kullanılan link (Lummen, 65 km, en yeniler önce):
 
 ```
-https://www.facebook.com/marketplace/category/vehicles?sortBy=creation_time_descend&exact=false
+https://www.facebook.com/marketplace/110843235610039/vehicles?sortBy=creation_time_descend&exact=false
 ```
 
 ## 4. Filtreler
@@ -56,6 +63,7 @@ https://www.facebook.com/marketplace/category/vehicles?sortBy=creation_time_desc
 | `SKIP_YEAR_AT_OR_BELOW` | 2008 | Başlıkta/açıklamada yıl bu ve daha eskiyse gönderilmez |
 | `SKIP_KM_ABOVE` | 200000 | Km bunun üstündeyse gönderilmez |
 | `CHECK_DESCRIPTION` | True | Yeni ilanın sayfasını açıp açıklamayı okur |
+| `NOT_A_CAR_WORDS` | jante, pneus, banden, remorque, moteur, mobylette... | Başlığı bu kelimelerden biriyle başlayan ilan araba sayılmaz, gönderilmez |
 
 - Ücretsiz (Free / 0 €) ilanlar her zaman atlanır.
 - Yıl ya da km bulunamazsa ilan bu yüzden elenmez, gönderilir. Mesajda "bilinmiyor" yazar.
@@ -81,5 +89,6 @@ python car_sniper.py
 python -m unittest discover -s tests -v
 ```
 
-Testler gerçek Facebook'a bağlanmaz: ayrıştırma/filtre testleri tarayıcısız çalışır, uçtan uca test
-yerel bir sahte Marketplace sayfası kullanır (Chromium kurulu değilse atlanır).
+Testler gerçek Facebook'a ve Telegram'a bağlanmaz: ayrıştırma/filtre testleri tarayıcısız çalışır, uçtan uca
+test gerçek Marketplace'in yapısına göre yazılmış yerel bir sahte sayfa kullanır (Chromium kurulu değilse atlanır).
+Telegram bağlantısını denemek için: `python car_sniper.py --test`

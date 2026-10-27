@@ -40,6 +40,7 @@ NEW_LISTINGS = {
     12: ("€1,100\nGenk, VLG",                 "2012 Ford Focus", "", "Nette wagen."),        # km sadece gizli veride
     13: ("€1,300\nHasselt, VLG",              "2013 Mazda 3", "", "Clean, 90k miles."),   # gizli veri mil cinsinden
     14: ("€1,400\nDiest, VLG",                "BMW 525d | 240.xxx km", "", "Gekocht rond 220.000 km."),
+    15: ("€300\nGenk, VLG",                   "4 winterbanden 16 inch", "", "Goede staat."),   # araba değil
 }
 # Sayfadaki gizli "vehicle_odometer_data" (misafire "Driven" satırı gösterilmiyor)
 ODOMETERS = {12: ("KILOMETERS", 230000), 13: ("MILES", 90000)}
@@ -185,7 +186,7 @@ class MockMarketplaceTest(unittest.TestCase):
             mock.patch.object(cs, "telegram_call", lambda method, payload: self.sent.append(payload) or True),
             mock.patch.object(cs, "TELEGRAM_BOT_TOKEN", "123:TEST"),
             mock.patch.object(cs, "TELEGRAM_CHAT_ID", "42"),
-            mock.patch.object(cs, "SEARCH_URLS", [self.base + "/marketplace/110843235610039/cars/?sortBy=creation_time_descend"]),
+            mock.patch.object(cs, "SEARCH_URLS", [self.base + "/marketplace/110843235610039/vehicles?sortBy=creation_time_descend"]),
             mock.patch.object(cs, "last_logged_location", {}),
         ]
         for patch in patches:
@@ -252,7 +253,7 @@ class MockMarketplaceTest(unittest.TestCase):
         self.assertEqual(self.sent, [])
 
         # 4. tur: SEARCH_URLS'e yeni link eklenince sessizce hafızaya alınır
-        cs.SEARCH_URLS.append(self.base + "/marketplace/110843235610039/vehicles/?sortBy=creation_time_descend")
+        cs.SEARCH_URLS.append(self.base + "/marketplace/110843235610039/cars/?sortBy=creation_time_descend")
         data = self.run_cycle()
         self.assertEqual(self.sent, [])
         self.assertEqual(len(data["seeded_urls"]), 2)
