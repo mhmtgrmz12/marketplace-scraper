@@ -10,3 +10,6 @@ __pycache__/
 # graphify önbelleği ve yerel durum dosyaları (graph.json / GRAPH_REPORT.md commit edilir)
 graphify-out/cache/
 graphify-out/.graphify_*
+
+# Sunucu kurulumunda (deploy/setup.sh) indirilen Chromium
+.browsers/

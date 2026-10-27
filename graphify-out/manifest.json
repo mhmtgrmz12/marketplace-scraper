@@ -6,9 +6,9 @@
     "semantic_hash": ""
   },
   "car_sniper.py": {
-    "mtime": 1793118333.085245,
-    "seen": 1793118535.352343,
-    "ast_hash": "da7d12be556858dc01d742bc177c04b9",
+    "mtime": 1793120430.2068112,
+    "seen": 1793120652.068554,
+    "ast_hash": "aa223cbd14f94b637b794987196d34eb",
     "semantic_hash": ""
   },
   ".claude/CLAUDE.md": {
@@ -18,15 +18,15 @@
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1793118519.0661292,
-    "seen": 1793118535.352347,
-    "ast_hash": "db51c768471ba852bed8979458ac3d97",
+    "mtime": 1793120645.6653917,
+    "seen": 1793120652.0685608,
+    "ast_hash": "eba6300818ed7b11a0c81fdf13c5edb0",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1793118532.4345524,
-    "seen": 1793118535.3523479,
-    "ast_hash": "9c469b996681f4fc6f8bd30a2de07e00",
+    "mtime": 1793120645.6658769,
+    "seen": 1793120652.068562,
+    "ast_hash": "5c344e1795c7a5d8a282536d5fa06dd7",
     "semantic_hash": ""
   },
   "requirements.txt": {
@@ -36,15 +36,33 @@
     "semantic_hash": ""
   },
   "tests/test_e2e_mock.py": {
-    "mtime": 1793118350.8699133,
-    "seen": 1793118535.352344,
-    "ast_hash": "f25ff4cc3785f5b48c2d57a1e86e438e",
+    "mtime": 1793120454.77196,
+    "seen": 1793120652.068558,
+    "ast_hash": "dea8a428b9c3dc9a2d7e1a402cbff407",
     "semantic_hash": ""
   },
   "tests/test_parsing.py": {
-    "mtime": 1793118345.1808045,
-    "seen": 1793118535.352345,
-    "ast_hash": "b8c07b80026c1920feaa7b8133003910",
+    "mtime": 1793120441.6585603,
+    "seen": 1793120652.0685592,
+    "ast_hash": "7af4073a5df70a74db3f33ab1ba19226",
+    "semantic_hash": ""
+  },
+  "deploy/check.sh": {
+    "mtime": 1793118912.6721199,
+    "seen": 1793120163.94765,
+    "ast_hash": "59db77da506004e342a30ee4cb0afa83",
+    "semantic_hash": ""
+  },
+  "deploy/setup.sh": {
+    "mtime": 1793120126.2835138,
+    "seen": 1793120163.9476511,
+    "ast_hash": "703dc18b64cfc91615cfd4a3c21b1f93",
+    "semantic_hash": ""
+  },
+  "deploy/README.md": {
+    "mtime": 1793120142.122387,
+    "seen": 1793120163.9476569,
+    "ast_hash": "79b731899fc51990edba32e3a382865a",
     "semantic_hash": ""
   }
 }

@@ -32,7 +32,8 @@ Bot Facebook'a giriş yapmadığı için linkte **konum olmak zorunda**. Konumsu
 
 1. **Gizli pencerede (giriş yapmadan)** `facebook.com/marketplace` → **Vehicles**'a gir.
    "Cars" alt kategorisini kullanma: misafire sıralamayı yok sayıp saatler önceki ilanları gösteriyor.
-   Vehicles'taki jant, lastik, römork, parça ve moped ilanlarını bot başlıklarından eler (`NOT_A_CAR_WORDS`).
+   Vehicles'taki jant, lastik, parça, bisiklet, scooter ve römork ilanlarını bot Facebook'un ilan kategorisine
+   bakarak eler (sadece "Cars & Trucks" gönderilir, `CAR_CATEGORIES`).
 2. **Konum**: Soldaki filtrelerde konuma ("Location: ...") tıkla, şehrini yazıp seç, **Apply**.
    Konum linke yazılmaz, oturumda kalır. Linkte gerekli olan **sayısal konum ID'sini** bulmak için
    konumu seçtikten sonra sayfadaki kategori linklerine bak: `/marketplace/<ID>/vehicles/` biçimindedir.
@@ -63,7 +64,8 @@ https://www.facebook.com/marketplace/110843235610039/vehicles?sortBy=creation_ti
 | `SKIP_YEAR_AT_OR_BELOW` | 2008 | Başlıkta/açıklamada yıl bu ve daha eskiyse gönderilmez |
 | `SKIP_KM_ABOVE` | 200000 | Km bunun üstündeyse gönderilmez |
 | `CHECK_DESCRIPTION` | True | Yeni ilanın sayfasını açıp açıklamayı okur |
-| `NOT_A_CAR_WORDS` | jante, pneus, banden, remorque, moteur, mobylette... | Başlığı bu kelimelerden biriyle başlayan ilan araba sayılmaz, gönderilmez |
+| `CAR_CATEGORIES` | Cars & Trucks | Sadece Facebook'un bu kategoriye koyduğu ilanlar gönderilir (jant, lastik, parça, bisiklet, scooter, römork gönderilmez) |
+| `NOT_A_CAR_WORDS` | jante, pneus, banden, remorque, moteur, vélo... | Başlığı bu kelimelerden biriyle başlayan ilan sayfası açılmadan atlanır |
 
 - Ücretsiz (Free / 0 €) ilanlar her zaman atlanır.
 - Yıl ya da km bulunamazsa ilan bu yüzden elenmez, gönderilir. Mesajda "bilinmiyor" yazar.
@@ -92,3 +94,8 @@ python -m unittest discover -s tests -v
 Testler gerçek Facebook'a ve Telegram'a bağlanmaz: ayrıştırma/filtre testleri tarayıcısız çalışır, uçtan uca
 test gerçek Marketplace'in yapısına göre yazılmış yerel bir sahte sayfa kullanır (Chromium kurulu değilse atlanır).
 Telegram bağlantısını denemek için: `python car_sniper.py --test`
+
+## 7. Sunucuda 7/24 çalıştırmak
+
+Mac kapalıyken de çalışması için bot bir Linux sunucuya (VPS) `systemd` servisi olarak kurulabilir.
+Tek komutla kurulum, Telegram/Facebook kontrolü ve günlük kullanım: [deploy/README.md](deploy/README.md)

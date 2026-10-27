@@ -32,6 +32,7 @@ Tarayıcıyı görmek ya da Facebook'un ne gösterdiğini incelemek için `HEADL
 | `tests/test_e2e_mock.py` | Sahte Marketplace sunucusu + gerçek Chromium ile uçtan uca test |
 | `seen_cars.json` | Çalışma anında oluşan hafıza (gitignore'da). `{"seeded_urls": [...], "seen_ids": [...]}` |
 | `requirements.txt` | `playwright`, `requests` |
+| `deploy/` | Sunucu (VPS) kurulumu: `setup.sh` (kur/güncelle), `car-sniper.service` (systemd), `check.sh`, kılavuz |
 
 ## Akış
 
@@ -70,9 +71,17 @@ Bunlar kullanıcının açıkça istediği davranışlar. **Değiştirmeden önc
   misafire San Francisco ilanları gelir. `/cars/` sayfası `sortBy`'ı **yok sayıyor** (en üstte saatler/günler önceki
   ilanlar, "Sort by" etiketi yok), `topLevelVehicleType=car_truck` bir şey filtrelemiyor; bu yüzden vehicles +
   kelime filtresi. `sortBy=creation_time_descend` şart; sayfada "Sort by: Date listed: Newest first" görünmeli.
-- **Araba olmayanlar:** başlığı `NOT_A_CAR_WORDS`'teki bir kelimeyle başlayan ilan (`Jantes BBS`, `4 pneus hiver`,
-  `Remorque`, `Moteur vw polo`, `Mobylette`) `⏭️ Atlandı (araba değil: jantes)` olur. Sadece başlığın başına bakılır
-  ("Opel Astra, nieuwe banden" elenmez); başlıksız kartta sayfadaki başlıkla kontrol edilir (kullanıcının seçimi).
+- **Sadece arabalar (kullanıcının isteği):** ilan sayfasının `<title>`'ındaki Facebook kategorisi
+  (`"Alfa Romeo 159 - Cars & Trucks - Seraing | Facebook Marketplace"`) `CAR_CATEGORIES` içinde değilse
+  `⏭️ Atlandı (araba değil: Bicycles)`. Gerçekte görülen diğer kategoriler: Car Wheels, Tires & Parts / Car Engines &
+  Engine Parts / Car Exterior Parts / Car Suspension & Steering / Utility Trailers / Bicycles / Scooters (& Mopeds) /
+  Motorcycles & Scooters / Go Karts / Commercial... Kategori okunamazsa (sayfa açılmadı) elenmez. Yanlış kategoriye
+  konmuş araba elenir (bir 2003 araba "Paper Ephemera"daydı). Sayfa açmadan önce hızlı ön eleme: başlığı
+  `NOT_A_CAR_WORDS`'teki bir kelimeyle başlayan ilan (`Jantes BBS`, `4 pneus hiver`, `Vélo`) da atlanır; sadece
+  başlığın başına bakılır ("Opel Astra, nieuwe banden" elenmez).
+- **Sunucu:** `deploy/` ile Ubuntu/Debian'da `systemd` servisi (`/opt/car-sniper`, kullanıcı `carsniper`, Telegram
+  bilgileri `/etc/car-sniper.env` izin 600, Chromium `/opt/car-sniper/.browsers`, `TZ=Europe/Brussels`,
+  `KillSignal=SIGINT`, `Restart=always`). Kurulum betikleri Türkçe çıktı verir ve tekrar çalıştırılabilir olmalı.
 
 ## Tasarım kararları ve tuzaklar
 
@@ -149,15 +158,20 @@ Bot gerçek Facebook Marketplace'te (misafir, kullanıcının Mac'inden) ve ger�
 arama sayfası, ilan sayfası okuma, yıl/km/fiyat/"araba değil" filtreleri ve Telegram mesajı (`--test` ve gerçek
 ilan: "Alfa Romeo 159 €1,750" telefona gitti). Bulgular yukarıdaki iş kuralları ve tasarım kararlarına işlendi.
 Gerçek ilanlarda doğru elenenler: Laguna 2011/230.000 km, Zafira 2013/200.500 km, 2005 Corsa, BMW 525d 2010/
-240.000 km, jant/lastik/römork/motor/moped/scooter ilanları. Testler: 29 test, hepsi geçiyor.
+240.000 km; kategori filtresiyle jant, lastik, römork, motor, moped, scooter, bisiklet ve parça ilanları. Testler: 31 test, hepsi geçiyor.
+
+Sunucu kurulumu (`deploy/`) Docker'da Ubuntu 24.04 + systemd ile denendi: kurulum, tekrar kurulum (güncelleme),
+`check.sh` (Telegram mesajı + Facebook turu), servis başlatma, çökünce yeniden başlama, SIGINT ile durma çalıştı.
+Gerçek bir VPS'te (veri merkezi IP'si) Facebook'un misafir erişimi henüz denenmedi.
 
 **Kalan işler:**
-1. Dalı `main`'e al: ana klasörde `git merge claude/marketplace-connection-tests-df4fae`.
-2. `seen_cars.json` bu worktree'de deneme turlarından kaldı (gitignore'da). Botu ana klasörde çalıştırınca orada
-   yeni hafıza oluşur, ilk tur yine sessizdir.
-3. İzlenecek: misafir akışında ilanlar dakikalar içinde düşüyor mu (17:27'de en yeni ilan 11 dk önceydi). Telegram'a
-   uzun süre hiç ilan gelmezse önce logda `🔍 ... X yeni` sayılarına, sonra sayfada "Sort by" etiketine bak.
-   Araba olmayan ilan gelirse başlığın ilk kelimesini `NOT_A_CAR_WORDS`'e ekle (önce kullanıcıya sor).
+1. Dalı `main`'e al ve GitHub'a push et (kurulum komutu `deploy/setup.sh`'ı GitHub `main`'den indiriyor).
+2. Kullanıcı VPS açınca `deploy/README.md`'deki adımlar; ilk iş `check.sh` ile Facebook giriş duvarı kontrolü.
+3. İzlenecek: kaydırmayla yüklenen ilan sayısı turdan tura değişirse, akışın derininden gelen eski ilanlar
+   "yeni" sayılabilir (servis ilk turdan 20 sn sonra 5 "yeni" ilan buldu). Gerekirse ilan sayfasındaki
+   "Listed X ago" ile yaş kontrolü düşünülebilir.
+4. İzlenecek: misafir akışında ilanlar dakikalar içinde düşüyor mu. Telegram'a uzun süre hiç ilan gelmezse logda
+   `🔍 ... X yeni` sayılarına, sonra sayfada "Sort by" etiketine bak.
 
 ## Git
 

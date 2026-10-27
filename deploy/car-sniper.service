@@ -1,0 +1,27 @@
+# Car Sniper systemd servisi. deploy/setup.sh tarafından /etc/systemd/system/ altına kopyalanır.
+[Unit]
+Description=Car Sniper - Facebook Marketplace araba botu
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=carsniper
+WorkingDirectory=/opt/car-sniper
+EnvironmentFile=/etc/car-sniper.env
+Environment=PLAYWRIGHT_BROWSERS_PATH=/opt/car-sniper/.browsers
+Environment=TZ=Europe/Brussels
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/opt/car-sniper/.venv/bin/python car_sniper.py
+# Çökerse ya da kapanırsa 60 sn sonra yeniden başlar; sunucu açılınca kendiliğinden başlar.
+Restart=always
+RestartSec=60
+# Bot Ctrl+C gibi durur ("👋 Bot durduruldu" yazar).
+KillSignal=SIGINT
+TimeoutStopSec=30
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
