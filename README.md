@@ -74,3 +74,12 @@ python car_sniper.py
 - Varsayılan tarama aralığı 180 sn + 15-45 sn rastgele beklemedir. Aralığı çok düşürürsen
   Facebook IP'ni geçici olarak engelleyebilir.
 - Tarayıcıyı görmek ya da engelleme sorunlarını incelemek için `HEADLESS = False` yap.
+
+## 6. Test
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+Testler gerçek Facebook'a bağlanmaz: ayrıştırma/filtre testleri tarayıcısız çalışır, uçtan uca test
+yerel bir sahte Marketplace sayfası kullanır (Chromium kurulu değilse atlanır).

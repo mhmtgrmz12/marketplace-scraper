@@ -18,21 +18,33 @@
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1793088962.4182699,
-    "seen": 1793089332.256202,
-    "ast_hash": "67d88e9d0760c3ba54c75dfd9551c1c5",
+    "mtime": 1793091902.0123045,
+    "seen": 1793091915.6160958,
+    "ast_hash": "7f3cb45863596f301f1e09ff512d16d0",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1793091387.8519254,
-    "seen": 1793091388.4456596,
-    "ast_hash": "cc05d11174595f947326ddd6c216a45e",
+    "mtime": 1793091910.112305,
+    "seen": 1793091915.6160984,
+    "ast_hash": "6f410bd2621f1afcdebd77ef87c1580e",
     "semantic_hash": ""
   },
   "requirements.txt": {
     "mtime": 1793089275.4250336,
     "seen": 1793089332.256206,
     "ast_hash": "e4504c6fd0fa130d06791fde719e2864",
+    "semantic_hash": ""
+  },
+  "tests/test_e2e_mock.py": {
+    "mtime": 1793091813.4682992,
+    "seen": 1793091915.6160858,
+    "ast_hash": "2220d0dfcf742d9ed34303bd99156030",
+    "semantic_hash": ""
+  },
+  "tests/test_parsing.py": {
+    "mtime": 1793091735.4042945,
+    "seen": 1793091915.6160893,
+    "ast_hash": "3cdb8c36f8ea38892d3a623cc64da8d2",
     "semantic_hash": ""
   }
 }
