@@ -1,7 +1,7 @@
 # Graph Report - marketplace-scraper  (2026-10-27)
 
 ## Corpus Check
-- 5 files · ~2,629 words
+- 5 files · ~2,699 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 1 file(s) not represented in the graph (top: (none) 1)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b2f14fca`
+- Built from commit: `1c4f27c6`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 

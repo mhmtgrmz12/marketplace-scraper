@@ -60,8 +60,8 @@ DELAY_BETWEEN_URLS = (5, 12)    # aynı tur içinde iki arama linki arası bekle
 
 SCROLL_STEPS = 3                # ilanların yüklenmesi için kaç kez aşağı kaydırılsın
 HEADLESS = True                 # tarayıcı penceresini görmek istersen False yap
-BROWSER_LOCALE = "tr-TR"        # IP'nin bulunduğu ülkeyle uyumlu olması iyi olur
-BROWSER_TIMEZONE = "Europe/Istanbul"
+BROWSER_LOCALE = "en-US"        # Facebook arayüz dili (kod İngilizce metinleri tanır)
+BROWSER_TIMEZONE = "Europe/Brussels"  # botun çalıştığı bilgisayarın saat dilimi olmalı
 
 # Hafıza dosyası script ile aynı klasörde tutulur.
 SEEN_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "seen_cars.json")
@@ -89,6 +89,8 @@ PRICE_TOKEN_RE = re.compile(
     rf"|(?:{_NUM})\s?(?:(?:{_CODES})(?![A-Za-z])|[{_SYMBOLS}])"     # 450.000 TL
 )
 FREE_WORDS = {"free", "ücretsiz", "bedava", "gratis"}
+MILEAGE_RE = re.compile(r"\d[\d.,]*\s*(?:k|bin|000)?\s*(?:km|mi|miles|mil)\b", re.IGNORECASE)
+LOCATION_RE = re.compile(r"^[^\d,]+,\s?[^\d,]+$")    # "Leopoldsburg, VLG", "Houston, TX"
 
 LOGIN_HINT_SELECTOR = 'input[name="email"], input[name="pass"], form[action*="login"], a[href*="/login"]'
 CLOSE_BUTTON_SELECTOR = (
@@ -361,16 +363,24 @@ def parse_card(raw):
         if line and line not in lines:
             lines.append(line)
 
-    # Kart düzeni genelde: fiyat (+ üstü çizili eski fiyat), başlık, konum, kilometre.
-    prices, title, details = [], "", []
-    for line in lines:
+    # Kart düzeni genelde: ["Just listed" gibi etiket], fiyat (+ üstü çizili eski
+    # fiyat), başlık, konum, kilometre. Fiyattan önceki satırlar etikettir, atlanır.
+    prices, rest = [], lines
+    for index, line in enumerate(lines):
         tokens = _price_tokens(line)
-        if tokens and not title:
+        if tokens:
             prices.extend(tokens)
-        elif not title:
-            title = line
-        else:
-            details.append(line)
+        elif prices:
+            rest = lines[index:]
+            break
+    else:
+        rest = [] if prices else lines
+
+    # Başlıksız ilanlarda ilk satır konumdur (ardından en fazla kilometre gelir).
+    if rest and LOCATION_RE.match(rest[0]) and all(MILEAGE_RE.search(l) for l in rest[1:]):
+        title, details = "", rest
+    else:
+        title, details = (rest[0], rest[1:]) if rest else ("", [])
 
     if not prices:
         price = "Belirtilmemiş"
@@ -385,7 +395,7 @@ def parse_card(raw):
 
     return Listing(
         id=item_id,
-        title=truncate(title or raw.get("alt", "").strip() or "Başlık bulunamadı", 150),
+        title=truncate(title or raw.get("alt", "").strip() or "Başlık yok (ilanda belirtilmemiş)", 150),
         price=truncate(price, 80),
         details=truncate(" • ".join(details) or "-", 300),
         image_url=image_url,
