@@ -25,6 +25,7 @@ import sys
 import time
 from dataclasses import dataclass
 from datetime import datetime, timedelta
+from typing import Optional
 
 try:
     import requests
@@ -44,10 +45,19 @@ except ImportError as exc:
 # Takip edilecek Marketplace arama linkleri (filtreleri ayarlayıp adres
 # çubuğundan kopyaladığın linkler). İstediğin kadar ekleyebilirsin.
 SEARCH_URLS = [
-    "https://www.facebook.com/marketplace/istanbul/vehicles"
-    "?minPrice=150000&maxPrice=600000&sortBy=creation_time_descend&exact=false",
-    # "https://www.facebook.com/marketplace/ankara/vehicles?maxPrice=400000&sortBy=creation_time_descend&exact=false",
+    "https://www.facebook.com/marketplace/category/vehicles?sortBy=creation_time_descend&exact=false",
 ]
+
+# --- Filtreler ---------------------------------------------------------------
+MAX_PRICE = 2000                  # bunun üstündeki ilanlar gönderilmez (2000 dahil gönderilir)
+MIN_PRICE = 100                   # bunun altındaki fiyatlar (1 €, 50 € gibi) sahte sayılır
+FAKE_PRICES = {123, 1234, 12345}  # "fiyat sorun" yerine yazılan sahte fiyatlar
+# Ücretsiz (Free / 0 €) ilanlar her zaman atlanır. Fiyatı okunamayan ilan elenmez.
+
+CHECK_DESCRIPTION = True          # yeni ilanın sayfasını açıp başlık + açıklamada yıl/km kontrolü yap
+SKIP_YEAR_AT_OR_BELOW = 2008      # yılı bu ve daha eski olanlar gönderilmez
+SKIP_KM_ABOVE = 200_000           # kilometresi bunun üstünde olanlar gönderilmez
+# Yıl ya da km bilgisi bulunamazsa ilan bu yüzden elenmez, gönderilir.
 
 # Telegram bilgileri. Dosyaya yazabilir ya da aynı isimli ortam
 # değişkenleriyle (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID) verebilirsin.
@@ -91,6 +101,31 @@ PRICE_TOKEN_RE = re.compile(
 FREE_WORDS = {"free", "ücretsiz", "bedava", "gratis"}
 MILEAGE_RE = re.compile(r"\d[\d.,]*\s*(?:k|bin|000)?\s*(?:km|mi|miles|mil)\b", re.IGNORECASE)
 LOCATION_RE = re.compile(r"^[^\d,]+,\s?[^\d,]+$")    # "Leopoldsburg, VLG", "Houston, TX"
+
+# Açıklamadan yıl ve km okumak için. Fiyat, km, motor hacmi gibi sayılar yıl sanılmasın diye
+# arkasından birim gelen ya da başka bir sayının parçası olan 4 haneli sayılar alınmaz.
+YEAR_RE = re.compile(
+    r"(?<!\d)(?<!\d[.,])(?<!€)(?<!€\s)(19[5-9]\d|20[0-4]\d)"
+    r"(?!\d|[.,]\d|\s*(?:€|(?:km|kms|cc|ccm|cm3|eur|euro|kg|kw|pk|hp|ps)\b))",
+    re.IGNORECASE,
+)
+_KM_NUMBER = r"(?<![\d.,])(\d{1,3}(?:[.,   ]\d{3})+|\d+)"   # 185.000 / 185,000 / 185 000
+_KM_THOUSANDS = r"(k|d|dzd|duizend|bin|mille)?"       # 150k km, 150dkm, 150 duizend km
+_KM_UNIT = r"(?:km|kms|klm|kilometers?|kilometres?)\b"
+KM_AFTER_RE = re.compile(rf"{_KM_NUMBER}\s*{_KM_THOUSANDS}\.?\s*{_KM_UNIT}", re.IGNORECASE)
+KM_BEFORE_RE = re.compile(                             # "km-stand: 185.000", "kilometrage 185000"
+    rf"(?:kilometerstand|km[\s.-]?stand|kilom[eé]trage|mileage|odometer|km)\s*[:=-]?\s*"
+    rf"{_KM_NUMBER}\s*{_KM_THOUSANDS}(?!\d|[.,]\d)(?!\s*(?:€|eur))",
+    re.IGNORECASE,
+)
+# Sadece ilanın kendi bölümlerine özgü başlıklar. Genel "Description" başlığı alınmaz:
+# sayfadaki önerilen başka ilanlarda da geçip yanlış yıl/km okutabilir.
+DESCRIPTION_HEADINGS = [
+    "seller's description", "about this vehicle",
+    "beschrijving van de verkoper", "over dit voertuig",
+    "description du vendeur", "à propos de ce véhicule",
+]
+SEE_MORE_RE = re.compile(r"^(See more|Meer weergeven|Voir plus|Devamını gör)$", re.IGNORECASE)
 
 LOGIN_HINT_SELECTOR = 'input[name="email"], input[name="pass"], form[action*="login"], a[href*="/login"]'
 CLOSE_BUTTON_SELECTOR = (
@@ -164,6 +199,34 @@ EXTRACT_CARDS_JS = """
 }
 """
 
+# İlan sayfasından başlık, açıklama ve "Driven 185,000 km" satırını okur.
+# Açıklama bölümü, başlığı ("Seller's description" vb.) bulunup kapsayıcısına çıkılarak alınır.
+LISTING_DETAILS_JS = """
+(headings) => {
+  const meta = (selector) => (document.querySelector(selector) || {}).content || '';
+  const sections = [];
+  const found = new Set();
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  while (walker.nextNode()) {
+    const text = walker.currentNode.nodeValue.trim().toLowerCase();
+    if (!headings.includes(text) || found.has(text)) continue;   // her başlığın ilki ilanın kendisine ait
+    found.add(text);
+    let el = walker.currentNode.parentElement;
+    while (el && el !== document.body && (el.innerText || '').trim().length <= text.length + 5) {
+      el = el.parentElement;
+    }
+    if (el && el !== document.body) sections.push((el.innerText || '').trim().slice(0, 3000));
+  }
+  const driven = ((document.body.innerText || '').match(/Driven\\s+[\\d.,]+\\s*(?:km|kilometers)/i) || [''])[0];
+  return {
+    title: meta('meta[property="og:title"]'),
+    description: meta('meta[property="og:description"]') || meta('meta[name="description"]'),
+    sections,
+    driven,
+  };
+}
+"""
+
 
 # =============================================================================
 # YARDIMCILAR
@@ -192,14 +255,22 @@ def describe_error(exc):
     return f"{type(exc).__name__}: {lines[0] if lines else ''}"
 
 
+def format_km(km):
+    return f"{km:,}".replace(",", ".")
+
+
 @dataclass
 class Listing:
     id: str
     title: str
     price: str
+    price_value: Optional[float]   # 0.0 = ücretsiz, None = okunamadı
     details: str
     image_url: str
     url: str
+    year: Optional[int] = None      # ilan sayfasından doldurulur
+    km: Optional[int] = None
+    description: str = ""
 
 
 # =============================================================================
@@ -306,13 +377,21 @@ def telegram_call(method, payload):
 
 def format_message(listing):
     esc = lambda s: html.escape(s, quote=False)
-    return (
-        "🚨 <b>YENİ FIRSAT ARABA DÜŞTÜ!</b>\n\n"
-        f"🚗 <b>Başlık:</b> {esc(listing.title)}\n"
-        f"💰 <b>Fiyat:</b> {esc(listing.price)}\n"
-        f"📍 <b>Detay:</b> {esc(listing.details)}\n\n"
-        f'🔗 <a href="{html.escape(listing.url)}">İlana Gitmek İçin Tıkla</a>'
-    )
+    lines = [
+        "🚨 <b>YENİ FIRSAT ARABA DÜŞTÜ!</b>",
+        "",
+        f"🚗 <b>Başlık:</b> {esc(listing.title)}",
+        f"💰 <b>Fiyat:</b> {esc(listing.price)}",
+        f"📍 <b>Detay:</b> {esc(listing.details)}",
+    ]
+    if CHECK_DESCRIPTION:
+        year = str(listing.year) if listing.year else "bilinmiyor"
+        km = format_km(listing.km) if listing.km else "bilinmiyor"
+        lines.append(f"📅 <b>Yıl:</b> {year}   🛣 <b>KM:</b> {km}")
+    if listing.description:
+        lines.append(f"📝 <b>Açıklama:</b> {esc(truncate(listing.description, 350))}")
+    lines += ["", f'🔗 <a href="{html.escape(listing.url)}">İlana Gitmek İçin Tıkla</a>']
+    return "\n".join(lines)
 
 
 def notify(listing):
@@ -349,6 +428,20 @@ def _price_tokens(line):
     tokens = [t.strip(" .,") for t in PRICE_TOKEN_RE.findall(line)]
     leftover = PRICE_TOKEN_RE.sub("", line).strip(" ·•|-")
     return tokens if tokens and not leftover else []
+
+
+def parse_price_value(token):
+    """'€1,500' / '1.500 €' / 'Ücretsiz' → 1500.0 / 1500.0 / 0.0"""
+    if token == "Ücretsiz":
+        return 0.0
+    match = re.search(r"\d[\d.,\s]*", token)
+    if not match:
+        return None
+    number = re.sub(r"[.,\s](?=\d{3}(?!\d))", "", match.group(0).strip())   # binlik ayraçları at
+    try:
+        return float(number.replace(",", "."))
+    except ValueError:
+        return None
 
 
 def parse_card(raw):
@@ -388,6 +481,7 @@ def parse_card(raw):
         price = f"{prices[0]} (eski fiyat: {prices[1]} 📉)"
     else:
         price = prices[0]
+    price_value = parse_price_value(prices[0]) if prices else None
 
     image_url = raw.get("img", "")
     if image_url.startswith("data:"):
@@ -397,10 +491,52 @@ def parse_card(raw):
         id=item_id,
         title=truncate(title or raw.get("alt", "").strip() or "Başlık yok (ilanda belirtilmemiş)", 150),
         price=truncate(price, 80),
-        details=truncate(" • ".join(details) or "-", 300),
+        price_value=price_value,
+        details=truncate(" • ".join(details) or "-", 150),
         image_url=image_url,
         url=f"https://www.facebook.com/marketplace/item/{item_id}/",
     )
+
+
+# =============================================================================
+# FİLTRELER
+# =============================================================================
+
+def extract_years(text):
+    return [int(y) for y in YEAR_RE.findall(text) if int(y) <= datetime.now().year + 1]
+
+
+def extract_km(text):
+    values = []
+    for regex in (KM_AFTER_RE, KM_BEFORE_RE):
+        for number, thousands in regex.findall(text):
+            value = int(re.sub(r"\D", "", number)) * (1000 if thousands else 1)
+            if 1000 <= value <= 2_000_000:    # "5 km uzakta" gibi mesafeler sayılmaz
+                values.append(value)
+    return values
+
+
+def price_rejection(listing):
+    """Fiyat yüzünden elenmesi gerekiyorsa sebebini, gerekmiyorsa None döner."""
+    value = listing.price_value
+    if value is None:
+        return None
+    if value <= 0:
+        return "ücretsiz"
+    if value < MIN_PRICE or value in FAKE_PRICES:
+        return f"sahte fiyat {listing.price}"
+    if value > MAX_PRICE:
+        return f"{MAX_PRICE} üstü fiyat"
+    return None
+
+
+def vehicle_rejection(listing):
+    """Yıl/km yüzünden elenmesi gerekiyorsa sebebini döner. Bilinmeyen değer elemez."""
+    if listing.year is not None and listing.year <= SKIP_YEAR_AT_OR_BELOW:
+        return f"{listing.year} model"
+    if listing.km is not None and listing.km > SKIP_KM_ABOVE:
+        return f"{format_km(listing.km)} km"
+    return None
 
 
 # =============================================================================
@@ -518,11 +654,73 @@ def scrape_search(page, url):
     return listings
 
 
+def read_listing_page(context, url):
+    """İlan sayfasını ayrı bir sekmede açıp başlık/açıklama/km bilgisini döner.
+
+    Ayrı sekme sayesinde yarım kalan bir yükleme sonraki ilanların açılmasını bozmaz.
+    """
+    page = context.new_page()
+    try:
+        page.goto(url, wait_until="domcontentloaded", timeout=45_000)
+        human_pause(1.5, 3)
+        dismiss_login_popup(page)
+        try:
+            page.get_by_role("button", name=SEE_MORE_RE).first.click(timeout=2_000)   # açıklamanın devamı
+            page.wait_for_timeout(500)
+        except Exception:
+            pass
+        return page.evaluate(LISTING_DETAILS_JS, DESCRIPTION_HEADINGS)
+    finally:
+        try:
+            page.close()
+        except Exception:
+            pass
+
+
+def apply_vehicle_info(listing, page_data=None):
+    """Karttan ve (varsa) ilan sayfasından yılı, km'yi ve açıklamayı listing'e işler."""
+    page_data = page_data or {"title": "", "description": "", "sections": [], "driven": ""}
+    texts = [page_data["description"]]
+    for section in page_data["sections"]:
+        lines = [l for l in section.splitlines() if l.strip().lower() not in DESCRIPTION_HEADINGS]
+        texts.append("\n".join(lines))
+    description_text = "\n".join(t for t in texts if t)
+
+    # Yıl önce başlıklardan, yoksa açıklamadan alınır. Açıklamadaki sonraki yıllar
+    # genelde muayene/bakım tarihi olduğu için en eski yıl aracın yılı sayılır.
+    years = extract_years(f"{listing.title}\n{page_data['title']}") or extract_years(description_text)
+    # Km önceliği: "Driven 185,000 km" alanı, kartta yazan km, açıklamadaki en yüksek km.
+    kms = (extract_km(page_data["driven"]) or extract_km(listing.details)
+           or extract_km(f"{page_data['title']}\n{description_text}"))
+    listing.year = min(years) if years else None
+    listing.km = max(kms) if kms else None
+    if description_text:
+        listing.description = " ".join(max(texts, key=len).split())
+
+
 # =============================================================================
 # ANA DÖNGÜ
 # =============================================================================
 
-def process_listings(store, url, listings, first_run):
+def evaluate_listing(page, listing):
+    """Fiyat ve yıl/km filtrelerini uygular; ilan elenecekse sebebini döner."""
+    reason = price_rejection(listing)
+    if reason or not CHECK_DESCRIPTION:
+        return reason
+    apply_vehicle_info(listing)              # önce kartta yazanlar; elenecekse sayfayı açmaya gerek yok
+    reason = vehicle_rejection(listing)
+    if reason:
+        return reason
+    try:
+        page_data = read_listing_page(page.context, listing.url)
+    except Exception as exc:
+        log(f"⚠️ İlan sayfası okunamadı, sadece karttaki bilgiyle karar verildi: {describe_error(exc)}")
+        return None
+    apply_vehicle_info(listing, page_data)
+    return vehicle_rejection(listing)
+
+
+def process_listings(store, page, url, listings, first_run):
     """Yeni ilanları bildirir; daha önce hiç taranmamış linkleri sessizce hafızaya alır."""
     if not store.is_seeded(url):
         for listing in listings:
@@ -536,6 +734,12 @@ def process_listings(store, url, listings, first_run):
     new_listings = [l for l in listings if l.id not in store]
     log(f"🔍 {short_url(url)} → {len(listings)} ilan tarandı, {len(new_listings)} yeni.")
     for listing in new_listings:
+        reason = evaluate_listing(page, listing)
+        if reason:
+            log(f"⏭️ Atlandı ({reason}): {listing.title} | {listing.price} | {listing.url}")
+            store.add(listing.id)
+            store.save()
+            continue
         log(f"🚨 YENİ İLAN: {listing.title} | {listing.price} | {listing.url}")
         if notify(listing):
             store.add(listing.id)
@@ -563,7 +767,7 @@ def run_cycle(store):
                     log(f"❌ Arama sayfası taranamadı ({short_url(url)}): {describe_error(exc)}")
                     continue
                 if listings:
-                    process_listings(store, url, listings, first_run)
+                    process_listings(store, page, url, listings, first_run)
         finally:
             try:
                 browser.close()
@@ -583,11 +787,15 @@ def send_test_message():
         sys.exit("TELEGRAM_BOT_TOKEN ve TELEGRAM_CHAT_ID ayarlanmamış.")
     sample = Listing(
         id="0",
-        title="2015 Volkswagen Golf 1.6 TDI (TEST)",
-        price="₺450.000 (eski fiyat: ₺500.000 📉)",
-        details="İstanbul • 120 bin km",
+        title="2012 Volkswagen Polo 1.2 (TEST)",
+        price="€1,800 (eski fiyat: €2,100 📉)",
+        price_value=1800.0,
+        details="Genk, VLG • 185K km",
         image_url="",
         url="https://www.facebook.com/marketplace/",
+        year=2012,
+        km=185_000,
+        description="Bouwjaar 2012, 185.000 km, gekeurd voor verkoop. Bu bir deneme mesajıdır.",
     )
     ok = notify(sample)
     log("✅ Deneme mesajı gönderildi." if ok else "❌ Deneme mesajı gönderilemedi.")

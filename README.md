@@ -41,10 +41,27 @@ python -m playwright install chromium
 Örnek link:
 
 ```
-https://www.facebook.com/marketplace/istanbul/vehicles?minPrice=150000&maxPrice=600000&sortBy=creation_time_descend&exact=false
+https://www.facebook.com/marketplace/category/vehicles?sortBy=creation_time_descend&exact=false
 ```
 
-## 4. Çalıştırma
+## 4. Filtreler
+
+`car_sniper.py` başındaki "Filtreler" bölümünden değiştirilebilir:
+
+| Ayar | Varsayılan | Ne yapar |
+|---|---|---|
+| `MAX_PRICE` | 2000 | Bunun üstündeki ilanlar gönderilmez (2000 dahil gönderilir) |
+| `MIN_PRICE` | 100 | Bunun altındaki fiyatlar (1 €, 50 €) sahte sayılıp atlanır |
+| `FAKE_PRICES` | 123, 1234, 12345 | Sahte fiyat olarak atlanır |
+| `SKIP_YEAR_AT_OR_BELOW` | 2008 | Başlıkta/açıklamada yıl bu ve daha eskiyse gönderilmez |
+| `SKIP_KM_ABOVE` | 200000 | Km bunun üstündeyse gönderilmez |
+| `CHECK_DESCRIPTION` | True | Yeni ilanın sayfasını açıp açıklamayı okur |
+
+- Ücretsiz (Free / 0 €) ilanlar her zaman atlanır.
+- Yıl ya da km bulunamazsa ilan bu yüzden elenmez, gönderilir. Mesajda "bilinmiyor" yazar.
+- Elenen ilanlar konsolda `⏭️ Atlandı (sebep)` satırıyla görünür ve bir daha kontrol edilmez.
+
+## 5. Çalıştırma
 
 ```bash
 python car_sniper.py
