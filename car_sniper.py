@@ -63,14 +63,21 @@ SKIP_YEAR_AT_OR_BELOW = 2008      # yılı bu ve daha eski olanlar gönderilmez
 SKIP_KM_ABOVE = 200_000           # kilometresi bunun üstünde olanlar gönderilmez
 # Yıl ya da km bilgisi bulunamazsa ilan bu yüzden elenmez, gönderilir.
 
-# Başlığı bu kelimelerden biriyle başlayan ilanlar araba değil sayılır ("Jantes BBS", "4 pneus hiver",
-# "Remorque 750 kg"). Sadece başlığın başına bakılır: "Opel Astra, nieuwe banden" elenmez.
+# Sadece Facebook'un bu kategorilere koyduğu ilanlar gönderilir. Kategori ilan sayfasının başlığından
+# okunur ("Alfa Romeo 159 - Cars & Trucks - Seraing"). Diğerleri: "Car Wheels, Tires & Parts", "Bicycles",
+# "Utility Trailers", "Motorcycles & Scooters", "Car Engines & Engine Parts"... Kategori okunamazsa elenmez.
+CAR_CATEGORIES = ["Cars & Trucks"]
+
+# Sayfa açılmadan önce hızlı ön eleme: başlığı bu kelimelerden biriyle başlayan ilanlar araba değil sayılır
+# ("Jantes BBS", "4 pneus hiver", "Remorque 750 kg"). Sadece başlığın başına bakılır: "Opel Astra, nieuwe
+# banden" elenmez.
 NOT_A_CAR_WORDS = [
     "jant", "jante", "jantes", "velg", "velgen",                      # jant
     "pneu", "pneus", "pneux", "band", "banden", "winterbanden", "zomerbanden", "lastik",
     "remorque", "aanhangwagen", "annhangwagen", "aanhanger",          # römork
     "moteur", "motor", "volant", "stuur",                             # parça
     "mobylette", "brommer", "bromfiets", "scooter", "scuter", "trottinette", "trotinette",
+    "vélo", "velo", "fiets", "e-bike", "ebike", "wiel", "wielen", "roue", "roues",   # bisiklet, teker
 ]
 
 # Telegram bilgileri. Dosyaya yazabilir ya da aynı isimli ortam
@@ -258,6 +265,7 @@ LISTING_DETAILS_JS = """
   }
   const driven = ((document.body.innerText || '').match(/Driven\\s+[\\d.,]+\\s*(?:km|kilometers)/i) || [''])[0];
   return {
+    pageTitle: document.title,   // "<başlık> - <kategori> - <konum> | Facebook Marketplace | Facebook"
     title: meta('meta[property="og:title"]'),
     description: meta('meta[property="og:description"]') || meta('meta[name="description"]'),
     sections,
@@ -311,6 +319,7 @@ class Listing:
     year: Optional[int] = None      # ilan sayfasından doldurulur
     km: Optional[int] = None
     description: str = ""
+    category: str = ""              # Facebook kategorisi, ilan sayfasından ("Cars & Trucks")
 
 
 # =============================================================================
@@ -583,6 +592,19 @@ def price_rejection(listing):
     return None
 
 
+def listing_category(page_title):
+    """'Alfa Romeo 159 - Cars & Trucks - Seraing, Belgium | Facebook Marketplace | Facebook' → 'Cars & Trucks'"""
+    parts = page_title.split(" | ")[0].split(" - ")
+    return parts[-2].strip() if len(parts) >= 3 else ""   # başlığın kendisinde " - " olabilir; sondan say
+
+
+def category_rejection(listing):
+    """Facebook ilanı araba kategorisine koymadıysa sebebini döner. Kategori bilinmiyorsa elemez."""
+    if listing.category and listing.category not in CAR_CATEGORIES:
+        return f"araba değil: {listing.category}"
+    return None
+
+
 def item_rejection(listing):
     """Başlık jant/lastik/römork/parça gibi araba olmayan bir şeyle başlıyorsa sebebini döner."""
     match = NOT_A_CAR_RE.match(listing.title)
@@ -781,6 +803,7 @@ def apply_vehicle_info(listing, page_data=None):
         texts.append("\n".join(lines))
     description_text = "\n".join(t for t in texts if t)
     page_title = " ".join(page_data["title"].replace("￼", " ").split())   # ￼ = Facebook'un emoji yeri
+    listing.category = listing_category(page_data.get("pageTitle", ""))
     if listing.title == NO_TITLE and page_title:   # Belçika'da çoğu kartta başlık yok, sayfada var
         listing.title = truncate(page_title, 150)
 
@@ -817,7 +840,7 @@ def evaluate_listing(page, listing):
         log(f"⚠️ İlan sayfası okunamadı, sadece karttaki bilgiyle karar verildi: {describe_error(exc)}")
         return None
     apply_vehicle_info(listing, page_data)   # başlıksız kartta başlık burada sayfadan gelir
-    return item_rejection(listing) or vehicle_rejection(listing)
+    return category_rejection(listing) or item_rejection(listing) or vehicle_rejection(listing)
 
 
 def process_listings(store, page, url, listings, first_run):

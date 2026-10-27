@@ -41,9 +41,14 @@ NEW_LISTINGS = {
     13: ("€1,300\nHasselt, VLG",              "2013 Mazda 3", "", "Clean, 90k miles."),   # gizli veri mil cinsinden
     14: ("€1,400\nDiest, VLG",                "BMW 525d | 240.xxx km", "", "Gekocht rond 220.000 km."),
     15: ("€300\nGenk, VLG",                   "4 winterbanden 16 inch", "", "Goede staat."),   # araba değil
+    # Başlıkta ipucu yok, sadece Facebook kategorisi araba olmadığını söylüyor
+    16: ("€450\nBrussel, BRU",                "Urbana One e-bike", "", "Nieuwstaat, 2023."),
+    17: ("€600\nVilvoorde, VLG",              "Golf 3 GTI 15 inch", "", "BBS, 2005."),
 }
 # Sayfadaki gizli "vehicle_odometer_data" (misafire "Driven" satırı gösterilmiyor)
 ODOMETERS = {12: ("KILOMETERS", 230000), 13: ("MILES", 90000)}
+# Sayfa başlığındaki Facebook kategorisi; verilmeyenler "Cars & Trucks"
+CATEGORIES = {16: "Bicycles", 17: "Car Wheels, Tires & Parts"}
 EXPECTED_SENT = [1, 8, 9, 11, 13]
 
 
@@ -122,7 +127,8 @@ def listing_html(item_id):
             {"id": str(item_id), "vehicle_odometer_data": {"unit": unit, "value": value}}]
     scripts = "".join(f'<script type="application/json">{json.dumps(d, separators=(",", ":"))}</script>'
                       for d in data)
-    return f"""<!doctype html><html><head><meta charset="utf-8">
+    page_title = f"{title} - {CATEGORIES.get(item_id, 'Cars & Trucks')} - {location} | Facebook Marketplace | Facebook"
+    return f"""<!doctype html><html><head><meta charset="utf-8"><title>{html.escape(page_title)}</title>
 <meta property="og:title" content="{html.escape(title)}"><meta property="og:description" content="{html.escape(short)}">
 </head><body>{scripts}<div role="main"><h1>{html.escape(title)}</h1>{about}{seller}</div>{picks}</body></html>"""
 

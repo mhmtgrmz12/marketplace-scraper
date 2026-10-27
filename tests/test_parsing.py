@@ -89,7 +89,8 @@ class ItemFilterTests(unittest.TestCase):
         # Gerçek "vehicles" akışındaki ucuz ilanların başlıkları
         rejected = ["Jantes BBS jamais montées", "4 pneus hiver 18p", "JANTE GOLF 3 GTI / VR6", "VOLANT GOLF 3 VR6",
                     "Remorque 240 x120 neuf", "Moteur vw polo 9n3 1.4tdi", "Mobylette puch de 1959", "Scuter 50cc",
-                    "Trotinette electrique", "2x velgen 16 inch", "4 winterbanden"]
+                    "Trotinette electrique", "2x velgen 16 inch", "4 winterbanden", "Vélo électrique Venilu",
+                    "4 wielen met banden"]
         kept = ["Opel Astra, nieuwe banden", "2012 VW Polo", "Motorhome Fiat Ducato", "Bandit 600",
                 "Renault laguna 3 2011", cs.NO_TITLE]
         for title in rejected + kept:
@@ -99,6 +100,30 @@ class ItemFilterTests(unittest.TestCase):
                     self.assertIn("araba değil", reason)
                 else:
                     self.assertIsNone(reason)
+
+    def test_category_from_real_page_titles(self):
+        cases = {
+            "Alfa Romeo 159 - Cars & Trucks - Seraing, Belgium | Facebook Marketplace | Facebook": "Cars & Trucks",
+            "Jantes nissan et pneu - Car Wheels, Tires & Parts - Verviers | Facebook Marketplace | Facebook":
+                "Car Wheels, Tires & Parts",
+            "Vélo électrique Venilu Urbana One - Bicycles - Brussels, Belgium | Facebook Marketplace | Facebook":
+                "Bicycles",
+            "Opel Corsa - zeer proper - Cars & Trucks - Saint-Georges-sur-Meuse | Facebook Marketplace": "Cars & Trucks",
+            "Facebook": "",   # ilan kaldırılmış / sayfa okunamadı
+            "": "",
+        }
+        for title, category in cases.items():
+            with self.subTest(title=title):
+                self.assertEqual(cs.listing_category(title), category)
+
+    def test_only_car_category_is_sent(self):
+        def reason(category):
+            listing = cs.Listing("1", "Opel", "€500", 500.0, "Genk, VLG", "", "https://x/", category=category)
+            return cs.category_rejection(listing)
+        self.assertIsNone(reason("Cars & Trucks"))
+        self.assertIsNone(reason(""), "kategori bilinmiyorsa elenmemeli")
+        self.assertEqual(reason("Bicycles"), "araba değil: Bicycles")
+        self.assertIn("Car Wheels", reason("Car Wheels, Tires & Parts"))
 
 
 class VehicleInfoTests(unittest.TestCase):
