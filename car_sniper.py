@@ -44,8 +44,12 @@ except ImportError as exc:
 
 # Takip edilecek Marketplace arama linkleri (filtreleri ayarlayıp adres
 # çubuğundan kopyaladığın linkler). İstediğin kadar ekleyebilirsin.
+# Linkte konum OLMALI: konumsuz linkte (/marketplace/category/vehicles) Facebook misafire
+# San Francisco ilanlarını gösterir. 110843235610039 = Lummen (Beringen'in yanı), 65 km çap.
+# Çapı değiştirmek için linkin sonuna &radius=40 gibi ekle. "cars" yerine "vehicles" römork,
+# jant, yedek parça ve motosiklet de getirir.
 SEARCH_URLS = [
-    "https://www.facebook.com/marketplace/category/vehicles?sortBy=creation_time_descend&exact=false",
+    "https://www.facebook.com/marketplace/110843235610039/cars/?sortBy=creation_time_descend&exact=false",
 ]
 
 # --- Filtreler ---------------------------------------------------------------
@@ -89,6 +93,8 @@ OUTSIDE_RESULTS_MARKERS = ["outside your search", "dışındaki sonuçlar"]
 
 CARD_SELECTOR = "a[href*='/marketplace/item/']"
 ITEM_ID_RE = re.compile(r"/marketplace/item/(\d+)")
+NO_TITLE = "Başlık yok (ilanda belirtilmemiş)"
+LOCATION_BUTTON_SELECTOR = '[role="button"][aria-label^="Location:"]'   # "Location: Lummen, Belgium, Within 65 km"
 
 _NUM = r"\d{1,3}(?:[.,\s]\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?"
 _SYMBOLS = "$€£₺¥₹₼"
@@ -109,13 +115,14 @@ YEAR_RE = re.compile(
     r"(?!\d|[.,]\d|\s*(?:€|(?:km|kms|cc|ccm|cm3|eur|euro|kg|kw|pk|hp|ps)\b))",
     re.IGNORECASE,
 )
-_KM_NUMBER = r"(?<![\d.,])(\d{1,3}(?:[.,   ]\d{3})+|\d+)"   # 185.000 / 185,000 / 185 000
+# 185.000 / 185,000 / 185 000 / 240.xxx (son haneleri gizlenmiş)
+_KM_NUMBER = r"(?<![\d.,])(\d{1,3}(?:[.,   ]\d{3})+|\d{1,3}[.,   ]?[xX]{3}|\d+)"
 _KM_THOUSANDS = r"(k|d|dzd|duizend|bin|mille)?"       # 150k km, 150dkm, 150 duizend km
 _KM_UNIT = r"(?:km|kms|klm|kilometers?|kilometres?)\b"
 KM_AFTER_RE = re.compile(rf"{_KM_NUMBER}\s*{_KM_THOUSANDS}\.?\s*{_KM_UNIT}", re.IGNORECASE)
 KM_BEFORE_RE = re.compile(                             # "km-stand: 185.000", "kilometrage 185000"
     rf"(?:kilometerstand|km[\s.-]?stand|kilom[eé]trage|mileage|odometer|km)\s*[:=-]?\s*"
-    rf"{_KM_NUMBER}\s*{_KM_THOUSANDS}(?!\d|[.,]\d)(?!\s*(?:€|eur))",
+    rf"{_KM_NUMBER}\s*{_KM_THOUSANDS}(?![a-z])(?!\d|[.,]\d)(?!\s*(?:€|eur))",   # "km"nin k'si binlik sayılmasın
     re.IGNORECASE,
 )
 # Sadece ilanın kendi bölümlerine özgü başlıklar. Genel "Description" başlığı alınmaz:
@@ -126,6 +133,12 @@ DESCRIPTION_HEADINGS = [
     "description du vendeur", "à propos de ce véhicule",
 ]
 SEE_MORE_RE = re.compile(r"^(See more|Meer weergeven|Voir plus|Devamını gör)$", re.IGNORECASE)
+# Açıklama bölümüne karışan sayfa metinleri: durum alanı, "See more/less", konum satırı.
+SECTION_NOISE_RE = re.compile(
+    r"^(?:condition|new|used\s*-\s*(?:like new|good|fair)|see (?:more|less)|.*·\s*location is approximate)$",
+    re.IGNORECASE,
+)
+SEE_LESS_SUFFIX_RE = re.compile(r"\s*\bSee (?:more|less)$", re.IGNORECASE)   # açıklamanın son satırına yapışık
 
 LOGIN_HINT_SELECTOR = 'input[name="email"], input[name="pass"], form[action*="login"], a[href*="/login"]'
 CLOSE_BUTTON_SELECTOR = (
@@ -199,11 +212,23 @@ EXTRACT_CARDS_JS = """
 }
 """
 
-# İlan sayfasından başlık, açıklama ve "Driven 185,000 km" satırını okur.
+# İlan sayfasından başlık, açıklama, "Driven 185,000 km" satırını ve gizli km verisini okur.
 # Açıklama bölümü, başlığı ("Seller's description" vb.) bulunup kapsayıcısına çıkılarak alınır.
+# Misafire "About this vehicle / Driven" gösterilmez ama araç formuyla girilen ilanların km'si
+# sayfadaki JSON'da durur: "vehicle_odometer_data":{"unit":"KILOMETERS","value":171000}.
+# Önerilen ilanlarınki karışmasın diye sadece bu ilanın ID'sinin geçtiği script'e bakılır.
 LISTING_DETAILS_JS = """
-(headings) => {
+({headings, itemId}) => {
   const meta = (selector) => (document.querySelector(selector) || {}).content || '';
+  let odometer = null;
+  for (const script of document.querySelectorAll('script')) {
+    const code = script.textContent || '';
+    if (!code.includes('"vehicle_odometer_data"') || !code.includes('"' + itemId + '"')) continue;
+    const data = (code.match(/"vehicle_odometer_data":\\{([^}]*)\\}/) || [])[1] || '';
+    const value = (data.match(/"value":(\\d+)/) || [])[1];
+    if (value) odometer = {unit: (data.match(/"unit":"(\\w+)"/) || [])[1] || '', value: Number(value)};
+    break;
+  }
   const sections = [];
   const found = new Set();
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -223,6 +248,7 @@ LISTING_DETAILS_JS = """
     description: meta('meta[property="og:description"]') || meta('meta[name="description"]'),
     sections,
     driven,
+    odometer,
   };
 }
 """
@@ -487,9 +513,14 @@ def parse_card(raw):
     if image_url.startswith("data:"):
         image_url = ""
 
+    # Resmin alt metni "<başlık> in <konum>" biçimindedir; başlıksız ilanda sadece " in Liège, WAL" kalır.
+    alt = " ".join(raw.get("alt", "").split())
+    if details and alt.endswith(f"in {details[0]}"):
+        alt = alt[: -len(f"in {details[0]}")].strip()
+
     return Listing(
         id=item_id,
-        title=truncate(title or raw.get("alt", "").strip() or "Başlık yok (ilanda belirtilmemiş)", 150),
+        title=truncate(title or alt or NO_TITLE, 150),
         price=truncate(price, 80),
         price_value=price_value,
         details=truncate(" • ".join(details) or "-", 150),
@@ -510,10 +541,18 @@ def extract_km(text):
     values = []
     for regex in (KM_AFTER_RE, KM_BEFORE_RE):
         for number, thousands in regex.findall(text):
-            value = int(re.sub(r"\D", "", number)) * (1000 if thousands else 1)
+            value = int(re.sub(r"\D", "", number)) * (1000 if thousands or "x" in number.lower() else 1)
             if 1000 <= value <= 2_000_000:    # "5 km uzakta" gibi mesafeler sayılmaz
                 values.append(value)
     return values
+
+
+def odometer_km(odometer):
+    """Sayfadaki gizli km verisini km olarak döner (mil ise çevrilir); yoksa ya da anlamsızsa None."""
+    if not odometer or not odometer.get("value"):
+        return None
+    km = round(odometer["value"] * (1.609344 if odometer.get("unit") == "MILES" else 1))
+    return km if 1000 <= km <= 2_000_000 else None
 
 
 def price_rejection(listing):
@@ -581,9 +620,12 @@ def new_stealth_context(browser):
     return context
 
 
-def handle_cookie_banner(page):
+def handle_cookie_banner(page, wait_ms=0):
+    """Çerez penceresini kapatır. Pencere sayfa yüklendikten biraz sonra gelir; wait_ms kadar beklenir."""
     try:
         button = page.get_by_role("button", name=COOKIE_BUTTON_RE).first
+        if wait_ms:
+            button.wait_for(state="visible", timeout=wait_ms)
         if button.count() and button.is_visible():
             button.click(timeout=3_000)
             log("🍪 Çerez onay penceresi kapatıldı.")
@@ -599,9 +641,12 @@ def dismiss_login_popup(page):
         if login_dialogs.count() == 0:
             return
         close_button = login_dialogs.first.locator(CLOSE_BUTTON_SELECTOR).first
-        if close_button.count() and close_button.is_visible():
-            close_button.click(timeout=3_000)
-            page.wait_for_timeout(500)
+        try:
+            if close_button.count() and close_button.is_visible():
+                close_button.click(timeout=3_000)
+                page.wait_for_timeout(500)
+        except Exception:
+            pass   # üstünde başka pencere (ör. çerez) varsa tıklanamaz; aşağıda DOM'dan silinir
         removed = page.evaluate(REMOVE_LOGIN_DIALOG_JS, LOGIN_HINT_SELECTOR)
         log("🔓 Giriş pop-up'ı " + ("DOM'dan silindi." if removed else "kapatıldı."))
     except Exception as exc:
@@ -617,11 +662,37 @@ def is_login_wall(page):
         return False
 
 
+last_logged_location = {}   # arama linki -> son loglanan konum
+
+
+def log_search_location(page, url):
+    """Facebook'un hangi konumu taradığını ilk seferde ve değiştiğinde loglar."""
+    try:
+        label = page.evaluate(
+            "s => { const el = document.querySelector(s); return el ? el.getAttribute('aria-label') : ''; }",
+            LOCATION_BUTTON_SELECTOR,
+        )
+    except Exception:
+        return
+    if label and last_logged_location.get(url) != label:
+        last_logged_location[url] = label
+        log(f"📍 Taranan konum: {label.split(':', 1)[-1].strip()} ({short_url(url)})")
+
+
 def scrape_search(page, url):
     """Bir arama sayfasını açar ve üzerindeki ilanları döner."""
-    page.goto(url, wait_until="domcontentloaded", timeout=60_000)
+    try:
+        page.goto(url, wait_until="domcontentloaded", timeout=60_000)
+    except Exception as exc:
+        # Turlar arası beklemeden sonra yeni tarayıcının ilk isteği ara sıra
+        # net::ERR_NAME_NOT_RESOLVED ile düşüyor; hemen ardından yapılan deneme açılıyor.
+        if "net::ERR_" not in str(exc):
+            raise
+        log(f"⚠️ Sayfa açılamadı ({describe_error(exc)}), tekrar deneniyor...")
+        human_pause(8, 12)
+        page.goto(url, wait_until="domcontentloaded", timeout=60_000)
     human_pause(2, 4)
-    handle_cookie_banner(page)
+    handle_cookie_banner(page, wait_ms=5_000)
     dismiss_login_popup(page)
 
     try:
@@ -632,10 +703,12 @@ def scrape_search(page, url):
         else:
             log("⚠️ Sayfada ilan kartı bulunamadı (sonuç yok ya da sayfa yapısı değişmiş olabilir).")
         return []
+    log_search_location(page, url)
 
     for _ in range(SCROLL_STEPS):
         page.evaluate("dy => window.scrollBy({top: dy, behavior: 'smooth'})", random.randint(700, 1200))
         human_pause(1.2, 2.5)
+        handle_cookie_banner(page)
         dismiss_login_popup(page)
 
     raw_cards = page.eval_on_selector_all(
@@ -669,7 +742,8 @@ def read_listing_page(context, url):
             page.wait_for_timeout(500)
         except Exception:
             pass
-        return page.evaluate(LISTING_DETAILS_JS, DESCRIPTION_HEADINGS)
+        item_id = ITEM_ID_RE.search(url).group(1)
+        return page.evaluate(LISTING_DETAILS_JS, {"headings": DESCRIPTION_HEADINGS, "itemId": item_id})
     finally:
         try:
             page.close()
@@ -679,23 +753,29 @@ def read_listing_page(context, url):
 
 def apply_vehicle_info(listing, page_data=None):
     """Karttan ve (varsa) ilan sayfasından yılı, km'yi ve açıklamayı listing'e işler."""
-    page_data = page_data or {"title": "", "description": "", "sections": [], "driven": ""}
+    page_data = page_data or {"title": "", "description": "", "sections": [], "driven": "", "odometer": None}
     texts = [page_data["description"]]
     for section in page_data["sections"]:
-        lines = [l for l in section.splitlines() if l.strip().lower() not in DESCRIPTION_HEADINGS]
+        lines = [SEE_LESS_SUFFIX_RE.sub("", l.strip()) for l in section.splitlines()]
+        lines = [l for l in lines if l.lower() not in DESCRIPTION_HEADINGS and not SECTION_NOISE_RE.match(l)]
         texts.append("\n".join(lines))
     description_text = "\n".join(t for t in texts if t)
+    page_title = " ".join(page_data["title"].replace("￼", " ").split())   # ￼ = Facebook'un emoji yeri
+    if listing.title == NO_TITLE and page_title:   # Belçika'da çoğu kartta başlık yok, sayfada var
+        listing.title = truncate(page_title, 150)
 
     # Yıl önce başlıklardan, yoksa açıklamadan alınır. Açıklamadaki sonraki yıllar
     # genelde muayene/bakım tarihi olduğu için en eski yıl aracın yılı sayılır.
-    years = extract_years(f"{listing.title}\n{page_data['title']}") or extract_years(description_text)
-    # Km önceliği: "Driven 185,000 km" alanı, kartta yazan km, açıklamadaki en yüksek km.
-    kms = (extract_km(page_data["driven"]) or extract_km(listing.details)
-           or extract_km(f"{page_data['title']}\n{description_text}"))
+    years = extract_years(f"{listing.title}\n{page_title}") or extract_years(description_text)
+    # Km önceliği: "Driven 185,000 km" alanı ya da sayfadaki gizli km verisi, kartta yazan km,
+    # başlık + açıklamadaki en yüksek km.
+    odometer = odometer_km(page_data.get("odometer"))
+    kms = (extract_km(page_data["driven"]) or ([odometer] if odometer else [])
+           or extract_km(listing.details) or extract_km(f"{page_title}\n{description_text}"))
     listing.year = min(years) if years else None
     listing.km = max(kms) if kms else None
     if description_text:
-        listing.description = " ".join(max(texts, key=len).split())
+        listing.description = " ".join(max(texts, key=len).replace("￼", " ").split())
 
 
 # =============================================================================

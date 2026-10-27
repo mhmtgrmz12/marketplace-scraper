@@ -65,8 +65,10 @@ Bunlar kullanıcının açıkça istediği davranışlar. **Değiştirmeden önc
   ilan sayfası açılamazsa ilan gönderilir ("bilinmiyor"). Kaçan fırsat, fazladan mesajdan daha kötü.
 - Elenen ilanlar sebebiyle loglanır (`⏭️ Atlandı (2006 model)`) ve seen sayılır. Telegram'a **gönderilemeyen**
   ilan seen sayılmaz, sonraki turda tekrar denenir.
-- Arama linki: `https://www.facebook.com/marketplace/category/vehicles?sortBy=creation_time_descend&exact=false`
-  (kullanıcının seçimi; "vehicles" motosiklet/römork da içerir). `sortBy=creation_time_descend` şart.
+- Arama linki: `https://www.facebook.com/marketplace/110843235610039/cars/?sortBy=creation_time_descend&exact=false`
+  (kullanıcının seçimi, 27.10.2026: Lummen = Beringen'in yanı, Facebook'un varsayılan 65 km çapı, sadece **Cars**).
+  Konumsuz linkte misafire San Francisco ilanları gelir; "vehicles" ucuz ilanlarda neredeyse sadece römork/jant/parça
+  getirir. `sortBy=creation_time_descend` şart.
 
 ## Tasarım kararları ve tuzaklar
 
@@ -123,10 +125,43 @@ python3 -m unittest discover -s tests -v
 
 ## Açık konular
 
-- **İlan sayfası okuma gerçek Facebook'ta henüz doğrulanmadı** (geliştirildiği ortamdan facebook.com'a erişim
-  yoktu). Telegram mesajlarında yıl/km hep "bilinmiyor" geliyorsa `LISTING_DETAILS_JS` ve `DESCRIPTION_HEADINGS`
-  gerçek ilan sayfasına göre güncellenmeli. Kart ayrıştırması kullanıcının ekran görüntüsüne göre doğrulandı.
-- "vehicles" kategorisi motosiklet/römork da getiriyorsa "Cars" alt kategorisine geçmek gerekebilir.
+### Kaldığım yer (27.10.2026, dal `claude/marketplace-connection-tests-df4fae`, commit edildi, `main`'e alınmadı)
+
+Gerçek Facebook Marketplace'e (misafir, kullanıcının Mac'inden) bağlanılıp arama ve ilan sayfaları doğrulandı.
+Kod ve testler güncellendi, **tüm testler geçiyor** (28 test, ~60 sn). Gerçek sayfada görülenler ve yapılanlar:
+
+- Konumsuz link San Francisco getiriyordu → link Lummen ID'li Cars linkiyle değişti (kullanıcı onayladı).
+  Taranan konum `📍 Taranan konum: ...` diye loglanıyor (`LOCATION_BUTTON_SELECTOR`, `log_search_location`).
+  Konum ID'si, filtredeki `aria-label="Location: ..."` butonu → "Change location" diyaloğundan bulundu; şehir
+  adı (`/marketplace/beringen/`) ve `latitude/longitude` parametreleri çalışmıyor, `&radius=N` etiketi değiştiriyor.
+- Çerez penceresi sayfadan ~1 sn sonra gelip login pop-up'ının Close tıklamasını engelliyordu ve hata DOM'dan
+  silme yedeğini atlatıyordu → `handle_cookie_banner(page, wait_ms=5_000)`, kaydırma döngüsünde tekrar kontrol,
+  Close tıklaması kendi `try`'ında. "Decline optional cookies" DOM'da önce geldiği için o seçiliyor; gerçek DOM'da
+  `aria-hidden` kopya butonlar var (`get_by_role` onları atlıyor).
+- Yeni Chromium'un ilk isteği turlar arası beklemeden sonra ara sıra `net::ERR_NAME_NOT_RESOLVED` veriyor →
+  `scrape_search` `net::ERR_` hatasında bir kez tekrar deniyor.
+- Belçika'da kartların çoğu başlıksız; resmin alt metni " in Liège, WAL" → başlık sayılmıyor, başlık ilan
+  sayfasının `og:title`'ından alınıyor (`NO_TITLE`).
+- Misafire "About this vehicle / Driven" **gösterilmiyor** (araç formuyla girilen ilanda bile). Km, sayfadaki
+  JSON'da: `"vehicle_odometer_data":{"unit":"MILES","value":287000}` (ilanın tırnaklı ID'sinin geçtiği script'ten;
+  mil → km; 1000 altı yok sayılır). Öncelik: Driven > gizli km > kart km > başlık+açıklama en büyük km.
+- Km ayrıştırma: `240.xxx km` tanınıyor; `KM_BEFORE_RE` artık "km"nin k'sini binlik saymıyor
+  (`Kilometerstand: 1500 km` eskiden 1.500.000 oluyordu).
+- Açıklamadan `Condition / Used - Good`, satır sonundaki `See less`, `... · Location is approximate` ve `￼` atılıyor.
+- Gerçek ilanlarda doğrulandı: Laguna 2011/230.000 km, Zafira 2013/200.500 km, 2005 Corsa, BMW 525d 2010/240.000 km
+  doğru elendi; Sharan 2011/245.900, Mazda 287.000 mil → 461.882 km doğru okundu.
+
+**Kalan işler:**
+1. `README.md` bölüm 3'ü güncelle: misafir modunda konum şehir adıyla değil sayısal ID ile verilir
+   (`/marketplace/<id>/cars/`), ID'yi bulma yolu ve örnek link eskimiş (`category/vehicles`).
+2. Bu dosyadaki "Tasarım kararları" ve "Test" bölümlerini yukarıdaki bulgulara göre güncelle (Km önceliği satırı,
+   login pop-up/çerez sırası, `test_e2e_mock.py` artık ~60 sn ve DNS hatası/geç çerez/gizli km tuzakları içeriyor).
+3. İstersen yeni testlerin eski kodda gerçekten düştüğünü kontrol et (`git show HEAD:car_sniper.py`).
+4. Kalan işlerden sonra `graphify update .` ve testleri çalıştırıp commit et; dalı `main`'e al
+   (`git merge claude/marketplace-connection-tests-df4fae`).
+5. İsteğe bağlı: botu gerçek Facebook'ta bir iki tur `python3 car_sniper.py` ile (Telegram ayarlıyken) çalıştırıp
+   mesajları kontrol et. Cars'ta da ara sıra jant/direksiyon/hizmet ilanı geliyor; gerekirse başlık/açıklamada
+   "jante, velg, band, pneu, volant" gibi kelimelerle eleme kullanıcıya sorulabilir.
 
 ## Git
 

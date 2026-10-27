@@ -46,6 +46,11 @@ class ParseCardTests(unittest.TestCase):
 
     def test_alt_text_is_title_fallback(self):
         self.assertEqual(card("", alt="2009 Toyota Corolla").title, "2009 Toyota Corolla")
+        self.assertEqual(card("€1,500\nLiège, WAL", alt="Opel Astra in Liège, WAL").title, "Opel Astra")
+
+    def test_alt_text_with_only_location_is_not_title(self):
+        # Gerçek Facebook: başlıksız ilanın resim alt metni " in Liège, WAL"
+        self.assertEqual(card("Just listed\n€1,500\nLiège, WAL", alt=" in Liège, WAL").title, cs.NO_TITLE)
 
     def test_non_item_link_is_ignored(self):
         self.assertIsNone(cs.parse_card({"href": "/marketplace/category/cars", "text": "x"}))
@@ -92,6 +97,11 @@ class VehicleInfoTests(unittest.TestCase):
         ("Driven 165,000 km", None, 165000),
         ("BMW 318d 2007 150k km", 2007, 150000),
         ("Skoda Fabia 2010. 178.000km. Gekeurd.", 2010, 178000),
+        # Gerçek ilanlardan
+        ("BMW 525d F10 | Automaat | 240.xxx km", None, 240000),
+        ("gekocht rond 220.000 km. Kilometerstand: 240.xxx km (wordt nog gereden)", None, 240000),
+        ("Opel Zafira, wagen van 2013 1.7 met 200500 kilometers diesel", 2013, 200500),
+        ("Kilometerstand: 1500 km, bouwjaar 2023", 2023, 1500),   # "km"nin k'si binlik sayılmamalı
     ]
 
     def test_extract_year_and_km(self):
@@ -133,11 +143,43 @@ class VehicleInfoTests(unittest.TestCase):
         cs.apply_vehicle_info(listing)
         self.assertEqual(listing.km, 245000)
 
-    def test_section_headings_are_stripped_from_description(self):
+    def page(self, odometer=None, description="", title="", sections=()):
+        return {"title": title, "description": description, "sections": list(sections),
+                "driven": "", "odometer": odometer}
+
+    def test_hidden_odometer_wins_over_description(self):
+        listing = self.listing(details="Genk, VLG • 120K km")
+        cs.apply_vehicle_info(listing, self.page({"unit": "KILOMETERS", "value": 171000}, "riem bij 240.000 km"))
+        self.assertEqual(listing.km, 171000)
+
+    def test_hidden_odometer_in_miles_is_converted(self):
         listing = self.listing()
-        cs.apply_vehicle_info(listing, {"title": "", "description": "", "driven": "",
-                                        "sections": ["Seller's description\nNette wagen, 2013"]})
-        self.assertEqual(listing.description, "Nette wagen, 2013")
+        cs.apply_vehicle_info(listing, self.page({"unit": "MILES", "value": 287000}))
+        self.assertEqual(listing.km, 461882)
+
+    def test_meaningless_hidden_odometer_is_ignored(self):
+        listing = self.listing()
+        cs.apply_vehicle_info(listing, self.page({"unit": "", "value": 1}, "Kilometerstand 185.000"))
+        self.assertEqual(listing.km, 185000)
+
+    def test_page_title_replaces_missing_card_title(self):
+        listing = self.listing(title=cs.NO_TITLE)
+        cs.apply_vehicle_info(listing, self.page(title="Renault  laguna 3 2011￼ voiture"))
+        self.assertEqual(listing.title, "Renault laguna 3 2011 voiture")
+        self.assertEqual(listing.year, 2011)
+
+    def test_card_title_is_kept(self):
+        listing = self.listing(title="2012 Polo")
+        cs.apply_vehicle_info(listing, self.page(title="Volkswagen Polo 1.2"))
+        self.assertEqual(listing.title, "2012 Polo")
+
+    def test_section_headings_and_page_noise_are_stripped_from_description(self):
+        # Gerçek ilan sayfasındaki "Seller's description" bölümünün innerText'i
+        section = ("Seller's description\nCondition\nUsed - Good\nNette wagen, 2013\n"
+                   "Nieuwe banden See less\nGenk, VLG · Location is approximate")
+        listing = self.listing()
+        cs.apply_vehicle_info(listing, self.page(sections=[section]))
+        self.assertEqual(listing.description, "Nette wagen, 2013 Nieuwe banden")
         self.assertEqual(listing.year, 2013)
 
 
