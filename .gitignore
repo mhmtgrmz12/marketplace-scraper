@@ -1,0 +1,12 @@
+# Botun çalışma sırasında oluşturduğu hafıza dosyaları
+seen_cars.json
+seen_cars.json.bak
+seen_cars.json.tmp
+
+__pycache__/
+*.pyc
+.venv/
+
+# graphify önbelleği ve yerel durum dosyaları (graph.json / GRAPH_REPORT.md commit edilir)
+graphify-out/cache/
+graphify-out/.graphify_*

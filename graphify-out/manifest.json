@@ -1,0 +1,38 @@
+{
+  ".claude/settings.json": {
+    "mtime": 1793089049.8850203,
+    "seen": 1793089332.2561848,
+    "ast_hash": "530c2e366009ca4c1d183d8ade5411ab",
+    "semantic_hash": ""
+  },
+  "car_sniper.py": {
+    "mtime": 1793089275.3610337,
+    "seen": 1793089332.2561946,
+    "ast_hash": "514ae7dbdfde888d6f89e73b7b295730",
+    "semantic_hash": ""
+  },
+  ".claude/CLAUDE.md": {
+    "mtime": 1793088962.4179604,
+    "seen": 1793089332.2561991,
+    "ast_hash": "9b31786b637be3c13978bec4c2330752",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1793088962.4182699,
+    "seen": 1793089332.256202,
+    "ast_hash": "67d88e9d0760c3ba54c75dfd9551c1c5",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1793089289.2170343,
+    "seen": 1793089332.2562041,
+    "ast_hash": "bb690dca68da18a6b1ba600f9073c13e",
+    "semantic_hash": ""
+  },
+  "requirements.txt": {
+    "mtime": 1793089275.4250336,
+    "seen": 1793089332.256206,
+    "ast_hash": "e4504c6fd0fa130d06791fde719e2864",
+    "semantic_hash": ""
+  }
+}
